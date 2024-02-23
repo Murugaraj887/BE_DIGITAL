@@ -1,0 +1,846 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A7313545-38F0-46C7-90A1-2EDAA0E33D64}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BECodeProd</RootNamespace>
+    <AssemblyName>BECodeProd</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\..\BE Code\BEData\BEData\bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="BEData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\BEData.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\..\..\BE Code\BEData\BEData\bin\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip.Reduced, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Microsoft.SqlServer.DTSPipelineWrap.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\..\BE Code\BEData\BEData\bin\Microsoft.SqlServer.DTSRuntimeWrap.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SQLServer.ManagedDTS, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Microsoft.SQLServer.ManagedDTS.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Vbe.Interop, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>bin\Microsoft.Vbe.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About.aspx" />
+    <Content Include="Account\ChangePassword.aspx" />
+    <Content Include="Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Account\Login.aspx" />
+    <Content Include="Account\Register.aspx" />
+    <Content Include="AddMasterCustomer.aspx" />
+    <Content Include="AddNewPortfolio.aspx" />
+    <Content Include="AlconPBSVSActualsComparison.aspx" />
+    <Content Include="AnchorLogin.aspx" />
+    <Content Include="BasePage.aspx" />
+    <Content Include="BEAdmin.aspx" />
+    <Content Include="BECurrencyCompositionReport.aspx" />
+    <Content Include="BEDataMainVsBEData_Bk.aspx" />
+    <Content Include="BEReport.aspx" />
+    <Content Include="BEReports_Sales.aspx" />
+    <Content Include="BETrendReport.aspx" />
+    <Content Include="BE_DataRprt_New.aspx" />
+    <Content Include="bin\BECodeProd.dll" />
+    <Content Include="bin\BECodeProd.pdb" />
+    <Content Include="boot.css" />
+    <Content Include="ClientCodePortfolioDump.aspx" />
+    <Content Include="ClientCodePortfolioScreen0.aspx" />
+    <Content Include="content\bootstrap-wysihtml5.css" />
+    <Content Include="content\bootstrap-wysihtml5.js" />
+    <Content Include="content\bootstrap.min.css" />
+    <Content Include="content\bootstrap.min.js" />
+    <Content Include="content\github.css" />
+    <Content Include="content\highlight.pack.js" />
+    <Content Include="content\jquery-1.10.2.js" />
+    <Content Include="content\jquery-1.7.2.min.js" />
+    <Content Include="content\prettify.css" />
+    <Content Include="content\prettify.js" />
+    <Content Include="content\wysihtml5-0.3.0.js" />
+    <Content Include="content\wysiwyg-color.css" />
+    <Content Include="Data\datepickercss\Site.css" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Data\datepickercss\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Data\datepickercss\ui-lightness\jquery-ui-1.8.14.custom.css" />
+    <Content Include="DMBEReport.aspx" />
+    <Content Include="DMDetails.aspx" />
+    <Content Include="DMExcelDownload.aspx" />
+    <Content Include="DMView.aspx" />
+    <Content Include="Download.aspx" />
+    <Content Include="editPortfolio.aspx" />
+    <Content Include="ExcelOperations\AlconPBSmacro_test.txt" />
+    <Content Include="ExcelOperations\BEReportDMMacro.txt" />
+    <Content Include="ExcelOperations\BEReportmacro.txt" />
+    <Content Include="ExcelOperations\Betrend_Macro.txt" />
+    <Content Include="ExcelOperations\datamacro_test.txt" />
+    <Content Include="ExcelOperations\ExcelDownload.txt" />
+    <Content Include="ExcelOperations\FillFormulaMacro.txt" />
+    <Content Include="ExcelOperations\FinpulseRepotMacro.txt" />
+    <Content Include="ExcelOperations\Macro1.txt" />
+    <Content Include="ExcelOperations\Macro\AlconPBSmacro_test.txt" />
+    <Content Include="ExcelOperations\Macro\datamacro_test.txt" />
+    <Content Include="ExcelOperations\Macro\ExcelDownload.txt" />
+    <Content Include="ExcelOperations\Macro\ExcelDownload_SDM.txt" />
+    <Content Include="ExcelOperations\Macro\RevenueMomentumMacro_NSO.txt" />
+    <Content Include="ExcelOperations\NewSheetsMacro_updated.txt" />
+    <Content Include="ExcelOperations\RevenueMomentumMacro.txt" />
+    <Content Include="ExhangeRateUpdate.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="GuidanceAndActuals.aspx" />
+    <Content Include="Images\addnew.jpg" />
+    <Content Include="Images\ajax.gif" />
+    <Content Include="Images\arrowclose.jpg" />
+    <Content Include="Images\arrowClose_New2.jpg" />
+    <Content Include="Images\arrowopen.jpg" />
+    <Content Include="Images\AuditLog.png" />
+    <Content Include="Images\BackButton.jpg" />
+    <Content Include="Images\background.gif" />
+    <Content Include="Images\banner_middle.jpg" />
+    <Content Include="Images\banner_middle1.jpg" />
+    <Content Include="Images\banner_middle_original.jpg" />
+    <Content Include="Images\bckgrnd.gif" />
+    <Content Include="Images\box.jpg" />
+    <Content Include="Images\bulleticon.jpg" />
+    <Content Include="Images\calendar%28audit%29.gif" />
+    <Content Include="Images\calendar.gif" />
+    <Content Include="Images\calendar1.gif" />
+    <Content Include="Images\close.gif" />
+    <Content Include="Images\close.png" />
+    <Content Include="Images\Delete.png" />
+    <Content Include="Images\Delete1.jpg" />
+    <Content Include="Images\dot.gif" />
+    <Content Include="Images\down.png" />
+    <Content Include="Images\download.png" />
+    <Content Include="Images\ECS.JPG" />
+    <Content Include="Images\ECS1.JPG" />
+    <Content Include="Images\ECSback.jpg" />
+    <Content Include="Images\error.png" />
+    <Content Include="Images\excel.jpg" />
+    <Content Include="Images\excel.png" />
+    <Content Include="Images\excel16.png" />
+    <Content Include="Images\ExcelLoading.gif" />
+    <Content Include="Images\exportexcel.bmp" />
+    <Content Include="Images\footer.JPG" />
+    <Content Include="Images\help.png" />
+    <Content Include="Images\info.png" />
+    <Content Include="Images\info4.JPG" />
+    <Content Include="Images\load.gif" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\maintenance.png" />
+    <Content Include="Images\menu4.jpg" />
+    <Content Include="Images\new.gif" />
+    <Content Include="Images\Newred.gif" />
+    <Content Include="Images\old.gif" />
+    <Content Include="Images\PageUnderConstruction.png" />
+    <Content Include="Images\pop.png" />
+    <Content Include="Images\popup.png" />
+    <Content Include="Images\right.png" />
+    <Content Include="Images\save.png" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\squares.gif" />
+    <Content Include="Images\success.png" />
+    <Content Include="Images\tab1\tab_active.gif" />
+    <Content Include="Images\tab1\tab_hover.gif" />
+    <Content Include="Images\tab1\tab_Inactive.gif" />
+    <Content Include="Images\tab1\tab_left_active.gif" />
+    <Content Include="Images\tab1\tab_left_hover.gif" />
+    <Content Include="Images\tab1\tab_left_inactive.gif" />
+    <Content Include="Images\tab1\tab_right_active.gif" />
+    <Content Include="Images\tab1\tab_right_hover.gif" />
+    <Content Include="Images\tab1\tab_right_inactive.gif" />
+    <Content Include="Images\underconstruction.jpg" />
+    <Content Include="Images\upload.png" />
+    <Content Include="Images\white.png" />
+    <Content Include="img\glyphicons-halflings.png" />
+    <Content Include="InfoPage.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="MCCDMSDMChange.aspx" />
+    <Content Include="NewProjectList.aspx" />
+    <Content Include="obj\Debug\BECodeProd.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\BECodeProd.dll" />
+    <Content Include="obj\Debug\BECodeProd.pdb" />
+    <Content Include="Process.htm" />
+    <Content Include="ReportAlconPBS.aspx" />
+    <Content Include="ReportClientCategorization.aspx" />
+    <Content Include="ReportFinpulse.aspx" />
+    <Content Include="ReportRTBRFinpulse.aspx" />
+    <Content Include="Reports.aspx" />
+    <Content Include="RevenueMomentum.aspx" />
+    <Content Include="RTBRVSActualsComparison.aspx" />
+    <Content Include="Scripts\BEHomeScripts.js" />
+    <Content Include="Scripts\bootstrap-multiselect.css" />
+    <Content Include="Scripts\bootstrap-multiselect.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-2.2.0.js" />
+    <Content Include="Select2\JScriptSelect2.js" />
+    <Content Include="Select2\select2.css" />
+    <Content Include="SessionTimeout.htm" />
+    <Content Include="SessionTimeOut2.aspx" />
+    <Content Include="Styles\css\bootstrap-select.css" />
+    <Content Include="Scripts\bootstrap-select.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\gridviewScroll.min.js" />
+    <Content Include="Scripts\IMStatus.js" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.21.custom\images\help.gif" />
+    <Content Include="Scripts\jquery-ui-1.8.21.custom\images\important.gif" />
+    <Content Include="Scripts\jquery-ui-1.8.21.custom\images\info.gif" />
+    <Content Include="Scripts\jquery-ui-1.8.21.custom\images\title.gif" />
+    <Content Include="Scripts\jquery-ui-1.8.21.custom\jquery.alerts.css" />
+    <Content Include="Scripts\jquery-ui-1.8.21.custom\jquery.alerts.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\JQuery.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\JS.js" />
+    <Content Include="Scripts\ol\BEHomeScripts.js" />
+    <Content Include="Scripts\ol\IMStatus.js" />
+    <Content Include="Scripts\ol\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\ol\jquery-1.4.1.js" />
+    <Content Include="Scripts\ol\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\ol\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\ol\JQuery.js" />
+    <Content Include="Scripts\ol\JS.js" />
+    <Content Include="Scripts\ol\PresenceControlAWAY.gif" />
+    <Content Include="Scripts\ol\PresenceControlBUSY.gif" />
+    <Content Include="Scripts\ol\PresenceControlOFF.gif" />
+    <Content Include="Scripts\ol\PresenceControlON.gif" />
+    <Content Include="Scripts\ol\ScrollableGridPlugin.js" />
+    <Content Include="Scripts\ol\Utility.js" />
+    <Content Include="Scripts\ScrollableGridPlugin.js" />
+    <Content Include="Scripts\Utility.js" />
+    <Content Include="SDMDetails.aspx" />
+    <Content Include="SDMView.aspx" />
+    <Content Include="SessionTimeOut.aspx" />
+    <Content Include="Storage\fileBanner.txt" />
+    <Content Include="Storage\fileHomePageSettings.txt" />
+    <Content Include="Storage\FreezeData.txt" />
+    <Content Include="Storage\FreezeData.xml" />
+    <Content Include="Storage\QuarterDetails.txt" />
+    <Content Include="Storage\WorkflowStage.txt" />
+    <Content Include="Styles\css\DM.css" />
+    <Content Include="Styles\css\grd_alt.png" />
+    <Content Include="Styles\css\grd_head.png" />
+    <Content Include="Styles\css\grd_pgr.png" />
+    <Content Include="Styles\css\style.css" />
+    <Content Include="Styles\Model.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="SubConAddEdit.aspx" />
+    <Content Include="SubConHome.aspx" />
+    <Content Include="Summary\BEReportSummary.aspx" />
+    <Content Include="Summary\Process.htm" />
+    <Content Include="Styles\bootstrap.min.css" />
+    <Content Include="Styles\jquery.min.js" />
+    <Content Include="UnAuthorised.aspx" />
+    <Content Include="UserDetails.aspx" />
+    <Content Include="VolumeGapReport.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="WebService.asmx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddMasterCustomer.aspx.cs">
+      <DependentUpon>AddMasterCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMasterCustomer.aspx.designer.cs">
+      <DependentUpon>AddMasterCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddNewPortfolio.aspx.cs">
+      <DependentUpon>AddNewPortfolio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddNewPortfolio.aspx.designer.cs">
+      <DependentUpon>AddNewPortfolio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminSite.Master.cs">
+      <DependentUpon>AdminSite.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminSite.Master.designer.cs">
+      <DependentUpon>AdminSite.Master</DependentUpon>
+    </Compile>
+    <Compile Include="AlconPBSVSActualsComparison.aspx.cs">
+      <DependentUpon>AlconPBSVSActualsComparison.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AlconPBSVSActualsComparison.aspx.designer.cs">
+      <DependentUpon>AlconPBSVSActualsComparison.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AnchorLogin.aspx.cs">
+      <DependentUpon>AnchorLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AnchorLogin.aspx.designer.cs">
+      <DependentUpon>AnchorLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BasePage.aspx.cs">
+      <DependentUpon>BasePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BasePage.aspx.designer.cs">
+      <DependentUpon>BasePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BEAdmin.aspx.cs">
+      <DependentUpon>BEAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BEAdmin.aspx.designer.cs">
+      <DependentUpon>BEAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BECurrencyCompositionReport.aspx.cs">
+      <DependentUpon>BECurrencyCompositionReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BECurrencyCompositionReport.aspx.designer.cs">
+      <DependentUpon>BECurrencyCompositionReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BEDataMainVsBEData_Bk.aspx.cs">
+      <DependentUpon>BEDataMainVsBEData_Bk.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BEDataMainVsBEData_Bk.aspx.designer.cs">
+      <DependentUpon>BEDataMainVsBEData_Bk.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BEReport.aspx.cs">
+      <DependentUpon>BEReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BEReport.aspx.designer.cs">
+      <DependentUpon>BEReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BEReports_Sales.aspx.cs">
+      <DependentUpon>BEReports_Sales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BEReports_Sales.aspx.designer.cs">
+      <DependentUpon>BEReports_Sales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BETrendReport.aspx.cs">
+      <DependentUpon>BETrendReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BETrendReport.aspx.designer.cs">
+      <DependentUpon>BETrendReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BE_DataRprt_New.aspx.cs">
+      <DependentUpon>BE_DataRprt_New.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BE_DataRprt_New.aspx.designer.cs">
+      <DependentUpon>BE_DataRprt_New.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BussinessEntity\AdminAllDU.cs" />
+    <Compile Include="BussinessEntity\Amounts.cs" />
+    <Compile Include="BussinessEntity\AuditLogUI.cs" />
+    <Compile Include="BussinessEntity\AuditUI.cs" />
+    <Compile Include="BussinessEntity\BEAdminMenuUI.cs" />
+    <Compile Include="BussinessEntity\BEAdminUI.cs" />
+    <Compile Include="BussinessEntity\BEClientAdminUI.cs" />
+    <Compile Include="BussinessEntity\BEDataUI.cs" />
+    <Compile Include="BussinessEntity\BEMonthlyFreeze.cs" />
+    <Compile Include="BussinessEntity\ClientCodePortfolio.cs" />
+    <Compile Include="BussinessEntity\Cryptography.cs" />
+    <Compile Include="BussinessEntity\DateUtility.cs" />
+    <Compile Include="BussinessEntity\DelegateUI.cs" />
+    <Compile Include="BussinessEntity\DMDetailsPopUp.cs" />
+    <Compile Include="BussinessEntity\DUPUCCMap.cs" />
+    <Compile Include="BussinessEntity\ExpenseColumns.cs" />
+    <Compile Include="BussinessEntity\ExpenseTemplateData.cs" />
+    <Compile Include="BussinessEntity\FindQuarter.cs" />
+    <Compile Include="BussinessEntity\Freeze.cs" />
+    <Compile Include="BussinessEntity\GenericUtility.cs" />
+    <Compile Include="BussinessEntity\KeyValues.cs" />
+    <Compile Include="BussinessEntity\KeyValuI.cs" />
+    <Compile Include="BussinessEntity\MailAlert.cs" />
+    <Compile Include="BussinessEntity\MasterEntity.cs" />
+    <Compile Include="BussinessEntity\MonthlyCurrencyConversion.cs" />
+    <Compile Include="BussinessEntity\RetrieveUI.cs" />
+    <Compile Include="BussinessEntity\RTBRFooter.cs" />
+    <Compile Include="BussinessEntity\StringExtension.cs" />
+    <Compile Include="BussinessEntity\UPdateApproveBE.cs" />
+    <Compile Include="BussinessEntity\VisaCountry.cs" />
+    <Compile Include="ClientCodePortfolioDump.aspx.cs">
+      <DependentUpon>ClientCodePortfolioDump.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientCodePortfolioDump.aspx.designer.cs">
+      <DependentUpon>ClientCodePortfolioDump.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientCodePortfolioScreen0.aspx.cs">
+      <DependentUpon>ClientCodePortfolioScreen0.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientCodePortfolioScreen0.aspx.designer.cs">
+      <DependentUpon>ClientCodePortfolioScreen0.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\UserIdentity.cs" />
+    <Compile Include="Data\DataAccess.cs" />
+    <Compile Include="Data\DemandDL.cs" />
+    <Compile Include="Data\JSON.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DMBEReport.aspx.cs">
+      <DependentUpon>DMBEReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DMBEReport.aspx.designer.cs">
+      <DependentUpon>DMBEReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DMDetails.aspx.cs">
+      <DependentUpon>DMDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DMDetails.aspx.designer.cs">
+      <DependentUpon>DMDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DMExcelDownload.aspx.cs">
+      <DependentUpon>DMExcelDownload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DMExcelDownload.aspx.designer.cs">
+      <DependentUpon>DMExcelDownload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DMView.aspx.cs">
+      <DependentUpon>DMView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DMView.aspx.designer.cs">
+      <DependentUpon>DMView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Download.aspx.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Download.aspx.designer.cs">
+      <DependentUpon>Download.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="editPortfolio.aspx.cs">
+      <DependentUpon>editPortfolio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="editPortfolio.aspx.designer.cs">
+      <DependentUpon>editPortfolio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExhangeRateUpdate.aspx.cs">
+      <DependentUpon>ExhangeRateUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExhangeRateUpdate.aspx.designer.cs">
+      <DependentUpon>ExhangeRateUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GuidanceAndActuals.aspx.cs">
+      <DependentUpon>GuidanceAndActuals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GuidanceAndActuals.aspx.designer.cs">
+      <DependentUpon>GuidanceAndActuals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InfoPage.aspx.cs">
+      <DependentUpon>InfoPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InfoPage.aspx.designer.cs">
+      <DependentUpon>InfoPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logger.cs" />
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MCCDMSDMChange.aspx.cs">
+      <DependentUpon>MCCDMSDMChange.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MCCDMSDMChange.aspx.designer.cs">
+      <DependentUpon>MCCDMSDMChange.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewProjectList.aspx.cs">
+      <DependentUpon>NewProjectList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewProjectList.aspx.designer.cs">
+      <DependentUpon>NewProjectList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportAlconPBS.aspx.cs">
+      <DependentUpon>ReportAlconPBS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportAlconPBS.aspx.designer.cs">
+      <DependentUpon>ReportAlconPBS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportClientCategorization.aspx.cs">
+      <DependentUpon>ReportClientCategorization.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportClientCategorization.aspx.designer.cs">
+      <DependentUpon>ReportClientCategorization.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFinpulse.aspx.cs">
+      <DependentUpon>ReportFinpulse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFinpulse.aspx.designer.cs">
+      <DependentUpon>ReportFinpulse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportRTBRFinpulse.aspx.cs">
+      <DependentUpon>ReportRTBRFinpulse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportRTBRFinpulse.aspx.designer.cs">
+      <DependentUpon>ReportRTBRFinpulse.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RevenueMomentum.aspx.cs">
+      <DependentUpon>RevenueMomentum.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RevenueMomentum.aspx.designer.cs">
+      <DependentUpon>RevenueMomentum.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RTBRVSActualsComparison.aspx.cs">
+      <DependentUpon>RTBRVSActualsComparison.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RTBRVSActualsComparison.aspx.designer.cs">
+      <DependentUpon>RTBRVSActualsComparison.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SDMDetails.aspx.cs">
+      <DependentUpon>SDMDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SDMDetails.aspx.designer.cs">
+      <DependentUpon>SDMDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SDMView.aspx.cs">
+      <DependentUpon>SDMView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SDMView.aspx.designer.cs">
+      <DependentUpon>SDMView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SessionTimeOut.aspx.cs">
+      <DependentUpon>SessionTimeOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionTimeOut.aspx.designer.cs">
+      <DependentUpon>SessionTimeOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SessionTimeOut2.aspx.cs">
+      <DependentUpon>SessionTimeOut2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionTimeOut2.aspx.designer.cs">
+      <DependentUpon>SessionTimeOut2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SubConAddEdit.aspx.cs">
+      <DependentUpon>SubConAddEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubConAddEdit.aspx.designer.cs">
+      <DependentUpon>SubConAddEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubConHome.aspx.cs">
+      <DependentUpon>SubConHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubConHome.aspx.designer.cs">
+      <DependentUpon>SubConHome.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Summary\BEReportSummary.aspx.cs">
+      <DependentUpon>BEReportSummary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Summary\BEReportSummary.aspx.designer.cs">
+      <DependentUpon>BEReportSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Summary\Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Summary\Site1.Master.designer.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UnAuthorised.aspx.cs">
+      <DependentUpon>UnAuthorised.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UnAuthorised.aspx.designer.cs">
+      <DependentUpon>UnAuthorised.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserDetails.aspx.cs">
+      <DependentUpon>UserDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserDetails.aspx.designer.cs">
+      <DependentUpon>UserDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VolumeGapReport.aspx.cs">
+      <DependentUpon>VolumeGapReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VolumeGapReport.aspx.designer.cs">
+      <DependentUpon>VolumeGapReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebService.asmx.cs">
+      <DependentUpon>WebService.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="BE_Sales\" />
+    <Folder Include="DashboardExcel\" />
+    <Folder Include="ExcelOperations\Template\" />
+    <Folder Include="ExcelOperations\UploadFiles\" />
+    <Folder Include="EXCEL\" />
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Scripts\jquery.alerts-1.1\" />
+    <Folder Include="UploadOperations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\Web.config" />
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdminSite.Master" />
+    <Content Include="App_Browsers\IE11.browser">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="EAS_BE_Portal_FAQ.pdf" />
+    <None Include="ExcelOperations\BEBulkUpdate.xlsx" />
+    <None Include="ExcelOperations\BEDataValidation.xlsx" />
+    <None Include="ExcelOperations\ClientCategorization_report.xlsx" />
+    <None Include="ExcelOperations\DownloadFiles\BEData.dmView" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_03May2019_1449.xls" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_03May2019_1455.xls" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_03May2019_1502.xls" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_03May2019_1507.xls" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_03May2019_1512.xls" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_03May2019_1540.xls" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_03May2019_1542.xls" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_03May2019_1549.xls" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_03May2019_1550.xls" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_03May2019_1552.xls" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_03May2019_1554.xls" />
+    <None Include="ExcelOperations\DownloadFiles\Q1_Anchor_BEData_ankita20_06May2019_1229.xls" />
+    <None Include="ExcelOperations\EAS_BEvsActuals_trend.xlsx" />
+    <None Include="ExcelOperations\EAS_BEvsActuals_trend1.xlsx" />
+    <None Include="ExcelOperations\EAS_BEvsActuals_trend_template.xlsx" />
+    <None Include="ExcelOperations\ExchRates_Upload.xls" />
+    <None Include="fonts\fontawesome-webfont.woff" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="Summary\Site1.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53326</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53312/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

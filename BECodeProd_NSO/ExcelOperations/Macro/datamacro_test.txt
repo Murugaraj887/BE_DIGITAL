@@ -1,0 +1,1185 @@
+
+
+
+  Set wks = Worksheets.Add
+ActiveSheet.Name = "Summary"
+
+
+
+
+    
+
+With wks
+ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:= _
+        "Data!A:N", Version:=xlPivotTableVersion14).CreatePivotTable _
+        TableDestination:=Sheets("Summary").Range("A1"), TableName:="PivotTable2", _
+        DefaultVersion:=xlPivotTableVersion14
+End With
+ 
+        
+    Sheets("Summary").Select
+
+	Dim Pt1 As PivotTable
+Dim PF1 As PivotField
+'Dim wks As Worksheet
+Set Pt1 = ActiveSheet.PivotTables("PivotTable2")
+sCol2 = Sheets("Data").Cells.Range("I1").Value
+Set PF1 = Pt1.PivotFields(sCol2)
+
+
+With ActiveSheet.PivotTables("PivotTable2").PivotFields("MasterClientCode")
+        .Orientation = xlPageField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("serviceLine")
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("vertical")
+        .Orientation = xlRowField
+        .Position = 2
+    End With
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("serviceLine").LayoutForm = _
+        xlTabular
+    'ActiveSheet.PivotTables("PivotTable2").AddDataField ActiveSheet.PivotTables( _
+        '"PivotTable2").PivotFields("BE (Benchmarkrate) (31-Mar-2016)(K USD)"), _
+        '"Count of BE (Benchmarkrate) (31-Mar-2016)(K USD)", xlCount
+
+Pt1.AddDataField PF1, sCol2 & " ", xlSum
+
+
+
+    ActiveSheet.PivotTables("PivotTable2").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable2").PivotFields("FinPulsefinalRev"), "Count of FinPulsefinalRev", _
+        xlCount
+    ActiveSheet.PivotTables("PivotTable2").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable2").PivotFields("RTBRFinalRev"), "Count of RTBRFinalRev", xlCount
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("Count of RTBRFinalRev" _
+        )
+        .Caption = "RTBR"
+        .Function = xlSum
+        .NumberFormat = "#,##0.00"
+    End With
+   ActiveSheet.PivotTables("PivotTable2").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable2").PivotFields("BE - RTBR"), "Count of BE - RTBR", xlCount
+
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("Count of BE - RTBR")
+        .Caption = "Sum of BE - RTBR"
+        .Function = xlSum
+    End With
+    
+With ActiveSheet.PivotTables("PivotTable2").PivotFields( _
+        "Count of FinPulsefinalRev")
+        .Caption = "Actuals"
+        .Function = xlSum
+        .NumberFormat = "0.00;[Red]0.00"
+    End With
+    
+   
+    
+    ActiveWorkbook.ShowPivotTableFieldList = False
+    Range("A1").Select
+    ActiveSheet.PivotTables("PivotTable2").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable2").PivotFields("Actuals - BE"), "Count of Actuals - BE", xlCount
+    ActiveWindow.SmallScroll Down:=-9
+    'With ActiveSheet.PivotTables("PivotTable2").PivotFields( _
+        '"Count of BE (Benchmarkrate) (31-Mar-2016)(K USD)")
+        '.Caption = "Sum of BE (Benchmarkrate) (31-Mar-2016)(K USD)"
+        '.Function = xlSum
+    'End With
+    
+
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("Count of Actuals - BE" _
+        )
+        .Caption = "Sum of Actuals - BE"
+        .Function = xlSum
+    End With
+    ActiveWindow.SmallScroll Down:=6
+    ActiveSheet.PivotTables("PivotTable2").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable2").PivotFields("Actuals - RTBR"), "Count of Actuals - RTBR", _
+        xlCount
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields( _
+        "Count of Actuals - RTBR")
+        .Caption = "Sum of Actuals - RTBR"
+        .Function = xlSum
+    End With
+   
+   
+    ActiveWorkbook.ShowPivotTableFieldList = False
+    Range("C3").Select
+    'ActiveSheet.PivotTables("PivotTable2").DataPivotField.PivotItems( _
+        '"Sum of BE (Benchmarkrate) (31-Mar-2016)(K USD)").Caption = _
+        '"BE (Benchmarkrate) (31-Mar)(K $)"
+   
+    ActiveSheet.PivotTables("PivotTable2").DataPivotField.PivotItems( _
+        "Sum of RTBRFinalRev").Caption = "RTBR (K$)"
+    
+    ActiveSheet.PivotTables("PivotTable2").PivotSelect "'Sum of FinPulsefinalRev'" _
+        , xlDataAndLabel, True
+   
+  
+          ActiveSheet.PivotTables("PivotTable2").DataPivotField.PivotItems( _
+        "Sum of FinPulsefinalRev").Caption = "Actuals (K $)"
+  
+    ActiveSheet.PivotTables("PivotTable2").DataPivotField.PivotItems( _
+        "Sum of BE - RTBR").Caption = "Gap(BE - RTBR)"
+
+
+    ActiveSheet.PivotTables("PivotTable2").DataPivotField.PivotItems( _
+        "Sum of Actuals - BE").Caption = "Gap(Actuals - BE)"
+
+    
+    ActiveSheet.PivotTables("PivotTable2").PivotSelect "'Sum of Actuals - RTBR'", _
+        xlDataAndLabel, True
+   
+    ActiveSheet.PivotTables("PivotTable2").PivotSelect "'Sum of Actuals - RTBR'", _
+        xlDataAndLabel, True
+    
+    ActiveSheet.PivotTables("PivotTable2").DataPivotField.PivotItems( _
+        "Sum of Actuals - RTBR").Caption = "Gap(Actuals - RTBR)"
+   
+   
+    
+ActiveSheet.PivotTables("PivotTable2").DisplayFieldCaptions = True
+ActiveWorkbook.ShowPivotTableFieldList = False
+
+
+
+
+ Rows("1:1").Select
+    Selection.Insert Shift:=xlDown, CopyOrigin:=xlFormatFromLeftOrAbove
+    Selection.Insert Shift:=xlDown, CopyOrigin:=xlFormatFromLeftOrAbove
+    'Range("A1").Select
+    'ActiveCell.FormulaR1C1 = "31st March  Benchmark rates are used."
+    'Range("A1").Select
+    'ActiveCell.FormulaR1C1 = "31st March  Benchmark rates are used."
+    Range("A1:B1").Select
+    Range("B1").Activate
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 65535
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+
+    
+  
+    Columns("C:E").Select
+    Selection.ColumnWidth = 15
+    Selection.NumberFormat = "0.00"
+  
+
+  With ActiveSheet.PivotTables("PivotTable2").PivotFields( _
+        "Serviceline")
+        .PivotItems("(blank)").Visible = False
+    End With
+    With ActiveSheet.PivotTables("PivotTable2")
+        .InGridDropZones = True
+        .DisplayFieldCaptions = False
+        .RowAxisLayout xlTabularRow
+    End With
+    ActiveWindow.SmallScroll Down:=-12
+    Columns("C:H").Select
+    Selection.NumberFormat = "0.00;[Red]0.00"
+    Columns("C:H").Select
+    Selection.NumberFormat = "#,##0.00"
+    Columns("A:H").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+   
+   
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlBottom
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+   
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlBottom
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+   
+With ActiveSheet.PivotTables("PivotTable2")
+        .DisplayFieldCaptions = True
+        .FieldListSortAscending = True
+    End With
+    Selection.NumberFormat = "0.00"
+    ActiveWorkbook.ShowPivotTableFieldList = False
+    Range("I5").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotSelect "", xlDataAndLabel, True
+    Columns("B:H").Select
+    Selection.ColumnWidth = 20
+    Selection.ColumnWidth = 15
+    ActiveWindow.SmallScroll Down:=24
+    Range("A5:H37").Select
+    Range("H37").Activate
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Range("H35").Select
+    ActiveWindow.SmallScroll Down:=-30
+    Range("A1").Select
+
+    Range("C6:H6").Select
+    With Selection
+        .HorizontalAlignment = xlRight
+        .VerticalAlignment = xlBottom
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+
+	Columns("C:H").Select
+    Columns("C:H").EntireColumn.AutoFit
+
+    ActiveWindow.DisplayGridlines = False
+
+  
+    Range("A1").Select
+
+	
+
+
+
+Set wks = Worksheets.Add
+ActiveSheet.Name = "ProjectType_Summary"
+
+With wks
+ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:= _
+        "WithProjectCode!A:M", Version:=xlPivotTableVersion14).CreatePivotTable _
+        TableDestination:=Sheets("ProjectType_Summary").Range("A1"), TableName:="PivotTable2", _
+        DefaultVersion:=xlPivotTableVersion14
+End With
+ 
+   
+    ActiveWorkbook.ShowPivotTableFieldList = True
+    
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("vertical")
+        .Orientation = xlPageField
+        .Position = 1
+     End With
+     
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("Serviceline")
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("ServiceOffering")
+        .Orientation = xlRowField
+        .Position = 2
+    End With
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("projecttype")
+        .Orientation = xlColumnField
+        .Position = 1
+    End With
+    ActiveSheet.PivotTables("PivotTable2").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable2").PivotFields("Actuals - RTBR"), "Count of Gap", xlCount
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("Count of Gap")
+        .Caption = "Sum of Gap"
+        .Function = xlSum
+    End With
+    Range("A6").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("MasterClientCode"). _
+        Subtotals = Array(False, False, False, False, False, False, False, False, False, False, _
+        False, False)
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("MasterClientName"). _
+        Subtotals = Array(False, False, False, False, False, False, False, False, False, False, _
+        False, False)
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("ProjectCode").Subtotals = _
+        Array(False, False, False, False, False, False, False, False, False, False, False, False)
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Serviceline").Subtotals = _
+        Array(False, False, False, False, False, False, False, False, False, False, False, False)
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("ServiceOffering").Subtotals = Array( _
+        False, False, False, False, False, False, False, False, False, False, False, False)
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("SDM").Subtotals = Array( _
+        False, False, False, False, False, False, False, False, False, False, False, False)
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("DH").Subtotals = Array( _
+        False, False, False, False, False, False, False, False, False, False, False, False)
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Vertical").Subtotals = _
+        Array(False, False, False, False, False, False, False, False, False, False, False, False)
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("NativeCurrency").Subtotals _
+        = Array(False, False, False, False, False, False, False, False, False, False, False, False _
+        )
+  
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("projecttype").Subtotals = _
+        Array(False, False, False, False, False, False, False, False, False, False, False, False)
+    Range("B1").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("projecttype").Caption = _
+        "Project Type"
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Project Type").LayoutForm _
+        = xlTabular
+    ActiveSheet.PivotTables("PivotTable2").CompactLayoutColumnHeader = _
+        "Project type"
+    Range("B2").Select
+  With ActiveSheet.PivotTables("PivotTable2").PivotFields( _
+        "Serviceline")
+        .PivotItems("(blank)").Visible = False
+    End With
+  With ActiveSheet.PivotTables("PivotTable2").PivotFields( _
+        "Project Type")
+        .PivotItems("(blank)").Visible = False
+    End With
+ ActiveWindow.DisplayGridlines = False
+    Columns("A:F").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Selection.NumberFormat = "#,##0.00"
+    
+    With ActiveSheet.PivotTables("PivotTable2")
+        .InGridDropZones = True
+        .RowAxisLayout xlTabularRow
+    End With
+
+ Sheets("ProjectType_Summary").Select
+    ActiveWorkbook.ShowPivotTableFieldList = False
+
+Sheets("Data").Select
+   Sheets("Data").Name = "Data@MCC"
+
+
+Worksheets("Summary").Activate
+Sheets("Summary").Select
+    Sheets("Summary").Move Before:=Sheets(1)
+
+    Sheets("Data@MCC").Select
+    Columns("A:N").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+
+    Columns("I:N").Select
+    Selection.NumberFormat = "#,##0.00"
+    Range("N5").Select
+
+    Sheets("WithProjectCode").Select
+    Columns("A:M").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+   
+    Columns("K:M").Select
+    Selection.NumberFormat = "#,##0.00"
+    Range("A1").Select
+   
+    Sheets("ProjectCode with +50 and -50 Ga").Select
+    Columns("A:L").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Columns("G:K").Select
+    Selection.NumberFormat = "#,##0.00"
+   Range("A1").Select
+    
+ Sheets("Data@MCC").Select
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 3
+    Range("I1:N1").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent6
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    Rows("1:1").Select
+    Range("C1").Activate
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlBottom
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Range("I1").Select
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlBottom
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Columns("I:I").Select
+    Selection.ColumnWidth = 15
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlBottom
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Rows("1:1").Select
+    Range("C1").Activate
+    Selection.RowHeight = 20
+    Selection.RowHeight = 33.75
+    Selection.RowHeight = 41.25
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlBottom
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+   
+    Range("A1").Select
+    Rows("1:1").RowHeight = 32.25
+    Rows("1:1").RowHeight = 35.25
+
+    Sheets("WithProjectCode").Select
+   
+    Columns("K:M").Select
+    Selection.ColumnWidth = 15
+    Range("K1:M1").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent6
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    Rows("1:1").Select
+    Range("F1").Activate
+    Selection.RowHeight = 20
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlBottom
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Selection.RowHeight = 38.25
+    Columns("I:I").ColumnWidth = 18.29
+    Columns("J:J").ColumnWidth = 19.57
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+  
+    Range("A2").Select
+    Sheets("ProjectCode with +50 and -50 Ga").Select
+    
+    Columns("G:G").Select
+    Selection.ColumnWidth = 15
+    Rows("1:1").Select
+    Range("F1").Activate
+    Selection.RowHeight = 20
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlCenter
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Selection.RowHeight = 33.75
+    Selection.RowHeight = 39.75
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlBottom
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Range("J1:L1").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent6
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+  
+    Range("A1").Select
+Sheets("ProjectType_Summary").Select
+    Range("A1").Select
+ Range("A1:B1").Select
+    Selection.Font.Bold = True
+    Range("A5:G36").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    Range("G12").Select
+    Sheets("ProjectType_Summary").Select
+    Columns("A:G").Select
+    With Selection.Font
+	.Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Range("H18").Select
+    Sheets("Data@MCC").Select
+    Columns("A:O").Select
+    With Selection.Font
+        .Name = "Calibri"
+	.Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    Range("A1").Select
+    Sheets("WithProjectCode").Select
+    Columns("A:M").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    Range("A1").Select
+   
+    Sheets("Summary").Select
+    Range("A4:G36").Select
+    With Selection.Font
+	.Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Range("A1").Select
+
+    Range("A1").Select
+
+    Sheets("ActionItems + or - above 50K").Select
+    ActiveWindow.ScrollWorkbookTabs Sheets:=-1
+    Sheets("ActionItems + or - above 50K").Select
+    Sheets("ActionItems + or - above 50K").Move Before:=Sheets(2)
+    ActiveWindow.ScrollWorkbookTabs Sheets:=-1
+    Sheets("Summary").Select
+    Range("A1:B1").Select
+    Selection.Font.Bold = True
+    Range("A1").Select
+
+Sheets("Data@MCC").Select
+    Sheets("Data@MCC").Move Before:=Sheets(3)
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 1
+    Sheets("Summary").Select
+Sheets("WithProjectCode").Select
+    Range("H1").Select
+    Selection.Copy
+    Range("I1").Select
+    Selection.PasteSpecial Paste:=xlPasteFormats, Operation:=xlNone, _
+        SkipBlanks:=False, Transpose:=False
+    Application.CutCopyMode = False
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 1
+    Range("A1").Select
+Columns("K:L").Select
+    Selection.ColumnWidth = 20
+    Range("F1").Select
+    Selection.Copy
+    Range("G1:H1").Select
+    Selection.PasteSpecial Paste:=xlPasteFormats, Operation:=xlNone, _
+        SkipBlanks:=False, Transpose:=False
+    Application.CutCopyMode = False
+    Columns("J:J").Select
+    Selection.ColumnWidth = 20
+    Rows("1:1").Select
+    Range("D1").Activate
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlBottom
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Columns("D:D").Select
+    ActiveWindow.ScrollColumn = 3
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 1
+    Range("A1").Select
+   Sheets("ActionItems + or - above 50K").Select
+   Rows("1:1").Select
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlBottom
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Range("C1").Select
+    ActiveCell.FormulaR1C1 = "Service Line"
+    Columns("H:H").Select
+    Selection.ColumnWidth = 20
+    Range("H1").Select
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection
+        .HorizontalAlignment = xlLeft
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 3
+    Columns("H:L").Select
+    Selection.ColumnWidth = 20
+    Selection.ColumnWidth = 15
+    Selection.NumberFormat = "0.00"
+    Range("H1:L1").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent6
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    Range("M1:O1").Select
+    Columns("N:N").ColumnWidth = 10.86
+    Columns("O:O").ColumnWidth = 13
+    With Selection.Interior
+        .PatternColorIndex = xlAutomatic
+        .Color = 65535
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 1
+    Columns("A:P").Select
+    With Selection.Font
+        .Name = "Calibri"
+	.Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMajor
+    End With
+    Columns("A:O").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    Rows("1:1").Select
+    With Selection.Font
+	.Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+    End With
+    Sheets("Summary").Select
+    Range("C13").Select
+    Sheets("ActionItems + or - above 50K").Select
+    Columns("A:O").Select
+    With Selection.Font
+        .Name = "Calibri"
+	.Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Columns("A:A").Select
+   
+	
+	
+
+    Range("A1").Select
+Sheets("ProjectCode with +50 and -50 Ga").Select
+    ActiveWindow.ScrollColumn = 4
+    ActiveWindow.ScrollColumn = 3
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 1
+    Columns("A:L").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontMinor
+    End With
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 3
+    Columns("J:L").Select
+    Selection.ColumnWidth = 12
+    Selection.ColumnWidth = 15
+    Range("G1:H1").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent1
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    Range("F1").Select
+    Selection.Copy
+    Range("G1:H1").Select
+    Selection.PasteSpecial Paste:=xlPasteFormats, Operation:=xlNone, _
+        SkipBlanks:=False, Transpose:=False
+    Application.CutCopyMode = False
+    Range("L8").Select
+    Sheets("ProjectCode with +50 and -50 Ga").Select
+    Selection.Delete Shift:=xlToLeft
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 1
+    Range("A1").Select
+    
+
+    Sheets("ProjectCode with +50 and -50 Ga").Select
+    Columns("M:M").Select
+    Selection.Delete Shift:=xlToLeft
+	Range("A1").Select
+   
+	Dim HeroName As String
+	Dim HeroName1 As String
+	Sheets("ActionItems + or - above 50K").Select
+	HeroName = Range("G1").Value
+	HeroName1=Mid(HeroName, 28, 4)
+
+    Range("A1").Select
+    Sheets("Summary").Select
+    Range("A1").Select
+	Range("A1").value="31st March "+HeroName1+" Benchmark rates are used"
+
+	Sheets("WithProjectCode").Select
+Range("N:N").Select
+Selection.Delete Shift:=xlToLeft
+Range("A1").Select
+
+Sheets("ProjectCode with +50 and -50 Ga").Select
+Range("M:M").Select
+Selection.Delete Shift:=xlToLeft
+Range("A1").Select	
+
+ Sheets("Summary").Select
+Range("A1").Select
+	
+	

@@ -1,0 +1,4 @@
+Worksheets("Data").Activate
+Sheets("Data").Range("S2").formula = "=IF(SUMPRODUCT(($B$2:$B2=B2)*($B$2:$B2=B2))>1,0,1)"
+Sheets("Data").Range("S2", "S" & Cells(Rows.Count, 1).End(xlUp).Row).FillDown
+Worksheets("Summary").Activate 

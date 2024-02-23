@@ -1,0 +1,317 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AdminSite.master.cs" ClientIDMode="Predictable"
+    Inherits="AdminSite" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<script language="javascript" type="text/javascript" src="Scripts/Utility.js"></script>
+<head id="Head1" runat="server">
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <meta http-equiv='refresh' content="<%= ConfigurationSettings.AppSettings["MetaRefresh"] %>" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <style id="Style1" type="text/css" runat="server"   >
+         #ServiceOffering{
+    color: floralwhite;
+    font-family: Calibri;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+    #MenuAdmin
+    {
+       
+        padding:0px 0px 0px 0px ! important;
+    }
+    a:Link
+    {
+        color:Red;
+    }
+    a:link, a:visited
+    {
+         color:#FFCB8B;
+         text-decoration:underline;
+    }
+    #MenuAdmin a, #MenuAdmin a:visited
+ {
+    background: transparent ! important;
+ }
+
+ .modal-dialog
+{
+    width:380px!important;
+  
+    }
+
+
+        .modal-header
+        {
+        	padding-top:5px!important;
+        	padding-right:5px!important;
+        	padding-left:15px!important;
+        	 background-color: rgb(51, 51, 51)!important;
+        	 height:30px!important;
+            border-top-right-radius:3px;
+            border-top-left-radius:3px;
+            font-size:14px;
+            font-family:Calibri;
+        }
+        .modal-title
+        {
+        	color: floralwhite !important;
+            font-family :Calibri!important;
+        }
+        .modal-body
+        {
+            
+        }
+        .close {
+            color: floralwhite !important;
+            font-size:1em;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        var winpopupstatus;
+        var winpopupstatus1;
+        function AddCustomerPopUpNODMChange() {
+                      
+            var left = (screen.width - 700) / 2;
+
+            if (winpopupstatus != null)
+            { winpopupstatus.close(); }
+            if (winpopupstatus1 != null)
+            { winpopupstatus1.close(); }
+
+            winpopupstatus1 = window.open('AddMasterCustomer.aspx?Type=DM', 'pop', 'left = ' + left + ',width=330, height=270, menubar=no, scrollbars=no, resizable=no');
+
+            winpopupstatus1.focus();
+            return false;
+
+
+        }
+
+        function AddCustomerPopUpNOSDMChange() {
+
+            var left = (screen.width - 700) / 2;
+
+            if (winpopupstatus != null)
+            { winpopupstatus.close(); }
+            if (winpopupstatus1 != null)
+            { winpopupstatus1.close(); }
+
+            winpopupstatus1 = window.open('AddMasterCustomer.aspx?Type=SDM', 'pop', 'left = ' + left + ',width=330, height=270, menubar=no, scrollbars=no, resizable=no');
+
+            winpopupstatus1.focus();
+            return false;
+
+
+        }
+
+        function NavigateTO(link) {
+            //window.navigate(link);
+
+        }
+        function PopUpFreeze() {
+
+            var left = (screen.width - 700) / 2;
+            var top = (screen.height - 300) / 2;
+            // window.showModalDialog('AppFreeze.aspx', 'bow', 'dialogHeight:10; dialogWidth:15;  center:yes;toolbar: false;status: 0;scroll:0;unadorned:0;help:no');
+            window.open('AppFreeze.aspx', 'pop', 'left = ' + left + ', top=' + top + ', width=450, height=190 , menubar=no, scrollbars=no, resizable=no');
+
+
+
+            //return false;
+        }
+    </script>
+    <style type="text/css">
+        .hand
+        {
+            cursor: pointer;
+            cursor: hand;
+        }
+        .style1
+        {
+            color: #FFFFFF;
+            font-size: xx-large;
+            font-family: Calibri;
+        }
+        #MenuAdmin a 
+        {
+             font-family: Calibri!important;
+             font-size: 12px!important;
+            
+        }
+    </style>
+
+     <link rel="stylesheet" href="boot.css"/>
+
+  
+
+    <script type="text/javascript">
+
+
+        var winpopupstatus;
+        var winpopupstatus1 = null;
+        function modal(clickedlink) {
+            //debugger;
+
+          
+
+                var left = (screen.width - 700) / 2;
+
+                if (winpopupstatus != null)
+                { winpopupstatus.close(); }
+                if (winpopupstatus1 != null)
+                { winpopupstatus1.close(); }
+
+
+                var link = clickedlink.textContent;
+                if (link == "Include Master Customer DM") {
+                    winpopupstatus1 = window.open('AddMasterCustomer.aspx?Type=DM', 'pop', 'left = ' + left + ',width=355, height=290, menubar=no, scrollbars=no, resizable=no');
+                    winpopupstatus1.focus();
+            }
+            else if (link == "Include Master Customer SDM") {
+                winpopupstatus1 = window.open('AddMasterCustomer.aspx?Type=SDM', 'pop', 'left = ' + left + ',width=355, height=290, menubar=no, scrollbars=no, resizable=no');
+                winpopupstatus1.focus();
+            }
+             
+                return false;
+            
+        }
+    </script>
+
+</head>
+<body style="padding-bottom: 0px; padding-left: 0px; padding-right: 0px; padding-top: 0px;
+    background-color:White">
+    <form id="frmHome" runat="server" title="">
+    <asp:ScriptManager ID="scriptmgr" ScriptMode="Release" runat="server">
+    </asp:ScriptManager>
+    <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="padding-right: 0px;
+        padding-left: 0px; padding-bottom: 0px; padding-top: 0px; margin: 0px;">
+        <tr valign="bottom">
+               <td valign="top" style="background-color:darkcyan;width: 100%;">
+                 <div id="SiteMap1" runat="server">
+                <table width="100%" >
+                    <tr>
+                        <td align="left">
+                    
+                   
+                                    <div style="float:left">
+
+                                      <asp:LinkButton ID="lnkSummary" Text="Summary" Font-Names="Calibri" Font-Size="12px" style="display:none"
+                                        Font-Bold="True" ForeColor="floralwhite" runat="server" 
+                                        Font-Underline="True" OnClick="btnSummary_Click"></asp:LinkButton>
+                                        &nbsp
+                            <asp:LinkButton ID="hypSignOut" Text="Digital BE Update" Font-Names="Calibri" Font-Size="12px"
+                                OnClientClick="NavigateTO('BEHome.aspx');" Font-Bold="True" ForeColor="White"
+                                runat="server" Font-Underline="True" OnClick="hypSignOut_Click"></asp:LinkButton>
+                            &nbsp
+                           <%-- <asp:LinkButton ID="hypAdmin" Text="Admin" Font-Names="Calibri" Font-Size="11px" Font-Bold="True"
+                                ForeColor="#FFCB8B" runat="server" OnClientClick="NavigateTO('BEAdmin.aspx');"
+                                Font-Underline="True" OnClick="hypAdmin_Click"></asp:LinkButton>
+                            &nbsp--%>
+                            <asp:LinkButton ID="hypSwitchUser" Text="Switch User" Font-Names="Calibri" Font-Size="12px"
+                                Font-Bold="True" ForeColor="White" runat="server" OnClientClick="NavigateTO('Login.aspx');"
+                                Font-Underline="True" OnClick="hypSwitchUser_Click"></asp:LinkButton>
+                                
+                                       &nbsp
+                             
+                                       
+                                      <asp:Button ID="btnBE" CssClass="hand" runat="server" Text=" BE" BackColor="#C41502" Visible="false"
+                                    Font-Bold="true" Font-Names="Calibri" ForeColor="White" BorderWidth="0px" Height="17px"
+                                    Font-Size="12px" OnClick="btnBE_Click" Width="90px" />
+                                   
+                                   <asp:LinkButton ID="btnReport" Text="Reports " Font-Names="Calibri" Font-Size="12px"
+                                Font-Bold="True" ForeColor="White" runat="server" Visible="true" 
+                                Font-Underline="True" OnClick="btnupload_Click"  ></asp:LinkButton>
+
+                                    &nbsp
+                                   <asp:LinkButton ID="lnkMasterCustomerDM" Text="Include Master Customer DM" Font-Names="Calibri" Font-Size="12px"
+                                Font-Bold="True" ForeColor="White" runat="server" Visible="true" 
+                                Font-Underline="True" OnClientClick="modal(this);return false"  ></asp:LinkButton>
+                                &nbsp
+                                   <asp:LinkButton ID="lnkMasterCustomerSDM" Text="Include Master Customer SDM" Font-Names="Calibri" Font-Size="12px"
+                                Font-Bold="True" ForeColor="White" runat="server" Visible="true" 
+                                Font-Underline="True" OnClientClick="modal(this);return false"   ></asp:LinkButton>
+                                    </div>
+                                    
+                                    <div style="float:left">
+                                            <asp:Menu ID="MenuAdmin" Orientation="Horizontal" runat="server" CssClass="menufont"
+                                    DynamicHorizontalOffset="2"
+                                    Font-Names="Calibri" Font-Bold="True"  style="float:left;margin-left:3px;"
+                                    StaticSubMenuIndent="10px" DynamicMenuItemStyle-Font-Size="12px" StaticPopOutImageUrl="~/Images/right.png" DynamicPopOutImageUrl="~/Images/right.png">
+                                    <Items>
+                                    </Items>
+
+                                    <StaticMenuStyle HorizontalPadding="20px"  ></StaticMenuStyle>
+                                  
+                                    <StaticMenuItemStyle HorizontalPadding="10px" Font-Size="12px" CssClass="menufont"  VerticalPadding="2px" />
+                                    
+                                    <DynamicHoverStyle  CssClass="menufont" Font-Size="12px"/>
+                                    <DynamicMenuStyle CssClass="menufont" Font-Size="12px"/>
+                                    <DynamicSelectedStyle CssClass="menufont" Font-Size="12px"/>
+                                    <DynamicMenuItemStyle CssClass="menufont"  Font-Size="12px" HorizontalPadding="15px" VerticalPadding="2px" />
+                                    <StaticHoverStyle  CssClass="menufont" Font-Size="12px"/>
+                                    <DynamicItemTemplate>
+                                        <%# Eval("Text") %>
+                                    </DynamicItemTemplate>
+                                    
+                                    <StaticItemTemplate>
+                                        <%# Eval("Text") %>
+                                    </StaticItemTemplate>
+                                </asp:Menu>
+                                   </div>
+                                   <div style="left"> 
+                                   <div style="float:right;margin-right:20px"> <asp:Label ID="lb" runat="server" ForeColor="White" Font-Names="Calibri" Font-Size="12px" Font-Bold="True" Text="Role as"></asp:Label>  <asp:Label ID="lblWelcome" runat="server" Font-Names="Calibri" Font-Size="12px" Font-Bold="True"
+                                    ForeColor="white" ></asp:Label></div></div>
+                        </td>
+                    </tr>
+                </table>
+               </div>
+            </td>
+         
+        </tr>
+    
+     
+        <tr style="height: 100%">
+            <td colspan="3">
+                <table border="0" cellspacing="0" cellpadding="0" align="center" width="100%">
+                    <tr>
+                        <%-- <td style="height: 320px; background-color: White" valign="top">
+                            <table>
+                                <tr>
+                                    <td colspan="2">
+                                        <div style="overflow: auto; height: 480px; width: 1px;" align="left">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>--%>
+                        <td style="width: 100%; background-color: White; vertical-align: top">
+                            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+      
+    </table>
+
+
+    
+    </form>
+    <script type="text/javascript" language="javascript">
+        function OnClick() {
+            if (divCalendar.style.display == "none")
+                divCalendar.style.display = "";
+            else
+                divCalendar.style.display = "none";
+        }
+    </script>
+</body>
+</html>

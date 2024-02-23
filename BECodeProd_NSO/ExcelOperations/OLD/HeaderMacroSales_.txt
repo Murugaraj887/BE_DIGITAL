@@ -1,0 +1,47 @@
+ 
+ActiveWorkbook.Sheets("Total_BE_Summary_Current").Activate
+
+
+
+Dim Prevqtr As String
+Dim Currqtr As String
+Dim Futureqtr As String
+
+Prevqtr = P
+Currqtr = C
+Futureqtr = F
+
+Range("A1").Select
+ActiveCell.FormulaR1C1 = Currqtr  & " " & "Total BE Summary- Americas"
+
+Dim pf As PivotField
+Dim pt As PivotTable
+Set pt = ActiveSheet.PivotTables(1)
+
+For Each pf In pt.DataFields
+
+    If pf.SourceName = "Prev Qtr Actuals" Then
+   
+      pf.Caption = Prevqtr & " " & "Actuals (31-Mar-2018) (KUSD) "
+     Else
+      pf.Caption = Currqtr & " " & pf.SourceName
+    End If
+    
+Next pf
+
+ActiveWorkbook.Sheets("Total_BE_Summary_Future").Activate
+
+Set pt = ActiveSheet.PivotTables(1)
+
+For Each pf In pt.DataFields
+
+          pf.Caption = Futureqtr & " " & pf.SourceName
+    
+Next pf
+
+Range("A1").Select
+ActiveCell.FormulaR1C1 = Futureqtr  & " " & "Total BE Summary- Americas"
+
+
+ActiveWorkbook.Sheets("Read Me").Activate
+ 

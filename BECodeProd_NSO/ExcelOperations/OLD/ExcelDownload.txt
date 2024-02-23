@@ -1,0 +1,62 @@
+
+
+
+Dim currentName As String
+currentName = ActiveSheet.Name
+ActiveSheet.Name = "BEDATA"
+    Sheets.Add Before:=ActiveSheet
+    ActiveSheet.Select
+    ActiveSheet.Name = "Summary"
+
+
+
+    ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:= _
+    "BEDATA!$A:$DC", Version:= _
+        xlPivotTableVersion15).CreatePivotTable TableDestination:="Summary!R3C1", _
+        TableName:="PivotTable1", DefaultVersion:=xlPivotTableVersion15
+        
+    Sheets("Summary").Select
+    Cells(3, 1).Select
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("MasterClientCode")
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("NativeCurrency")
+        .Orientation = xlRowField
+        .Position = 2
+    End With
+    
+    Header1 = Worksheets("BEDATA").Cells(1, "Q").Value
+    Header2 = Worksheets("BEDATA").Cells(1, "AL").Value
+    
+    Set Pt1 = ActiveSheet.PivotTables("PivotTable1")
+    Dim PF1 As PivotField
+  
+    
+
+    
+    Set PF1 = Pt1.PivotFields(Header1)
+    Pt1.AddDataField PF1, Header1 & " ", xlSum
+
+    Set PF2 = Pt1.PivotFields(Header2)
+    Pt1.AddDataField PF2, Header2 & " ", xlSum
+    
+    Pt1.PivotFields("MasterClientCode").LayoutForm = xlTabular
+
+
+
+
+    
+    ActiveSheet.PivotTables("PivotTable1").PivotFields("MasterClientCode"). _
+        Subtotals = Array(False, False, False, False, False, False, False, False, False, False, _
+        False, False)
+    
+    Sheets("BEDATA").Select
+    ActiveSheet.Name = currentName
+    
+    Sheets("Summary").Select
+    Worksheets("Summary").Cells(3, "A").Value = "MasterClientCode"
+    
+    
+    
+

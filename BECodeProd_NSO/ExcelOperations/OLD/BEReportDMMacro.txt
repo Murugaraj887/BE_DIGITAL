@@ -1,0 +1,190 @@
+Dim Pt1 As PivotTable
+Dim PF1, PF2, PF3, PF4, PF5, PF6, PF7, PF8, PF9, PF10, PF11, PF12, PF13, PF14, PF15, PF16, PF17, PF18, PF19, PF20 As PivotField
+Dim wks As Worksheet
+
+sCol1 = Sheets("BE_data").Cells.Range("I1").Value
+sCol2 = Sheets("BE_data").Cells.Range("BM1").Value
+sCol3 = Sheets("BE_data").Cells.Range("BN1").Value
+sCol4 = Sheets("BE_data").Cells.Range("BO1").Value
+sCol5 = Sheets("BE_data").Cells.Range("BP1").Value
+sCol6 = Sheets("BE_data").Cells.Range("BQ1").Value
+sCol7 = Sheets("BE_data").Cells.Range("BR1").Value
+sCol8 = Sheets("BE_data").Cells.Range("BS1").Value
+sCol9 = Sheets("BE_data").Cells.Range("BT1").Value
+sCol10 = Sheets("BE_data").Cells.Range("BU1").Value
+sCol11 = Sheets("BE_data").Cells.Range("BG1").Value
+sCol12 = Sheets("BE_data").Cells.Range("BV1").Value
+sCol13 = Sheets("BE_data").Cells.Range("EE1").Value
+sCol14 = Sheets("BE_data").Cells.Range("EK1").Value
+sCol15 = Sheets("BE_data").Cells.Range("CM1").Value
+sCol16 = Sheets("BE_data").Cells.Range("DX1").Value
+sCol17 = Sheets("BE_data").Cells.Range("DY1").Value
+sCol18 = Sheets("BE_data").Cells.Range("EL1").Value
+sCol19 = Sheets("BE_data").Cells.Range("EM1").Value
+sCol20 = Sheets("BE_data").Cells.Range("EN1").Value
+
+Set wks = Worksheets.Add
+ActiveSheet.Name = "BE_Summary"
+
+With wks
+ActiveWorkbook.PivotCaches.Add(SourceType:=xlDatabase, SourceData:= _
+        "BE_data!$A:$EO").CreatePivotTable TableDestination:=Sheets("BE_Summary").Range("A3"), TableName:= _
+        "PivotTable1", DefaultVersion:=xlPivotTableVersion10
+End With
+
+Set Pt1 = ActiveSheet.PivotTables("PivotTable1")
+
+If Err Then
+Exit Sub
+End If
+
+
+    
+ 
+
+    Set PF1 = Pt1.PivotFields(sCol2)
+    Pt1.AddDataField PF1, sCol2 & " ", xlSum
+    'Q4'15  Actual (USD)")
+    
+    Set PF2 = Pt1.PivotFields(sCol3)
+    Pt1.AddDataField PF2, sCol3 & " ", xlSum
+    'Q1'16  BE (W0) (BenchmarkRate) (USD)
+    
+    Set PF3 = Pt1.PivotFields(sCol4)
+    Pt1.AddDataField PF3, sCol4 & " ", xlSum
+    
+    Set PF4 = Pt1.PivotFields(sCol5)
+    Pt1.AddDataField PF4, sCol5 & " ", xlSum
+    
+    Set PF5 = Pt1.PivotFields(sCol6)
+    Pt1.AddDataField PF5, sCol6 & " ", xlSum
+    
+    Set PF6 = Pt1.PivotFields(sCol7)
+    Pt1.AddDataField PF6, sCol7 & " ", xlSum
+    
+    Set PF7 = Pt1.PivotFields(sCol8)
+    Pt1.AddDataField PF7, sCol8 & " ", xlSum
+    
+    Set PF8 = Pt1.PivotFields(sCol9)
+    Pt1.AddDataField PF8, sCol9 & " ", xlSum
+    
+    Set PF9 = Pt1.PivotFields(sCol10)
+    Pt1.AddDataField PF9, sCol10 & " ", xlSum
+    
+    Set PF10 = Pt1.PivotFields(sCol11)
+    Pt1.AddDataField PF10, sCol11 & " ", xlSum
+    
+    Set PF11 = Pt1.PivotFields(sCol12)
+    Pt1.AddDataField PF11, sCol12 & " ", xlSum
+    
+    Set PF12 = Pt1.PivotFields(sCol13)
+    Pt1.AddDataField PF12, sCol13 & " ", xlSum
+    
+    Set PF13 = Pt1.PivotFields(sCol14)
+    Pt1.AddDataField PF13, sCol14 & " ", xlSum
+    
+    Set PF14 = Pt1.PivotFields(sCol15)
+    Pt1.AddDataField PF14, sCol15 & " ", xlSum
+    
+    Set PF15 = Pt1.PivotFields(sCol16)
+    Pt1.AddDataField PF15, sCol16 & " ", xlSum
+    
+    Set PF16 = Pt1.PivotFields(sCol17)
+    Pt1.AddDataField PF16, sCol17 & " ", xlSum
+    
+    Set PF17 = Pt1.PivotFields(sCol18)
+    Pt1.AddDataField PF17, sCol18 & " ", xlSum
+    
+    Set PF18 = Pt1.PivotFields(sCol19)
+    Pt1.AddDataField PF18, sCol19 & " ", xlSum
+    
+    Set PF19 = Pt1.PivotFields(sCol20)
+    Pt1.AddDataField PF19, sCol20 & " ", xlSum
+    
+
+    With Pt1.DataPivotField
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+
+    With Pt1.PivotFields("Vertical")
+        .Orientation = xlColumnField
+        .Position = 1
+    End With
+    
+
+    Pt1.PivotSelect "", xlDataAndLabel, True
+    With Selection.Font
+        .Name = "Arial"
+        .Size = 8
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    
+    Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+    Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+    With Selection.Borders(xlEdgeLeft)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeTop)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeBottom)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeRight)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideVertical)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideHorizontal)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+       
+    With Pt1.PivotFields("Vertical")
+        .PivotItems("(blank)").Visible = False
+    End With
+    
+    Sheets("BE_Summary").Cells.EntireColumn.AutoFit
+    Sheets("BE_Summary").Cells.Range("A1:A100").RowHeight = 11.5
+    Sheets("BE_Summary").Cells.Range("A:A").ColumnWidth = 35
+    
+    Sheets("BE_Summary").Activate
+    ActiveWindow.DisplayGridlines = False
+
+
+
+    Pt1.PivotSelect "Data[All]", xlLabelOnly, True
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorLight2
+        .TintAndShade = 0.799981688894314
+        .PatternTintAndShade = 0
+    End With

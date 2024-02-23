@@ -1,0 +1,242 @@
+
+ 
+
+Dim PivotWorkbookname As String
+Dim DataWorkbookname As String
+Dim TalentWorkbookname As String
+Dim Talenttemplate As String
+Dim ThisWorkbook As Workbook
+
+
+Dim dt As String
+Dim dt2 As String
+dt = Format(DateTime.Now, "dd_mmm_yyyy")
+dt2 = Format(DateTime.Now, "dd_mmm")
+Set ThisWorkbook = ActiveWorkbook
+
+
+Dim Prevqtr As String
+Dim Currqtr As String
+Dim Futureqtr As String
+
+Dim Current As String
+Dim Future As String
+
+
+
+Prevqtr = P
+Currqtr = C
+Futureqtr = F
+'Futureqtr = "Q1'20"
+ 
+sname = SL
+ 
+Current = "BE_Summary_Data_" & Currqtr 
+Future = "BE_Summary_Data_" & Futureqtr 
+
+    
+''Filtering data
+ If sname <> "EAS" Then
+ 
+    For Each ws In ActiveWorkbook.Worksheets
+        If ws.Name = Current  Or ws.Name = Future  Or ws.Name = "DigitalTagged_Data" Or ws.Name = "Fin_Summary_Data" Or ws.Name = "OpenOpp_Data" Or ws.Name = "ClosedOpp_data" Then
+  
+                ws.Activate
+                ws.Range("A1").Select
+                Selection.AutoFilter
+        If ws.Name = Current   Then
+           
+            ws.Range("$A$1:$CZ$12989").AutoFilter Field:=1, Criteria1:="<>" & "*" & sname & "*", Operator:=xlFilterValues
+        ElseIf ws.Name = Future   Then
+            ws.Range("$A$1:$CZ$12989").AutoFilter Field:=1, Criteria1:="<>" & "*" & sname & "*", Operator:=xlFilterValues
+        ElseIf ws.Name = "DigitalTagged_Data" Then
+            ws.Range("$A$1:$CZ$12989").AutoFilter Field:=1, Criteria1:="<>" & "*" & sname & "*", Operator:=xlFilterValues
+        ElseIf ws.Name = "Fin_Summary_Data" Then
+            ws.Range("$A$1:$CZ$22989").End(xlUp).AutoFilter Field:=4, Criteria1:="<>" & "*" & sname & "*", Operator:=xlFilterValues
+      
+        ElseIf ws.Name = "OpenOpp_Data" Then
+              ws.Range("$A$1:$CZ$12989").End(xlUp).AutoFilter Field:=24, Criteria1:="<>" & "*" & sname & "*", Operator:=xlFilterValues
+        ElseIf ws.Name = "ClosedOpp_data" Then
+              ws.Range("$A$1:$CZ$12989").End(xlUp).AutoFilter Field:=24, Criteria1:="<>" & "*" & sname & "*", Operator:=xlFilterValues
+       
+       
+    End If
+        
+        End If
+ 
+        
+        If ws.Name = Current    Or ws.Name = Future    Or ws.Name = "DigitalTagged_Data" Or ws.Name = "Fin_Summary_Data" Or ws.Name = "OpenOpp_Data" Or ws.Name = "ClosedOpp_data" Then
+         
+        
+            LastRow = ws.Cells(Rows.Count, "A").End(xlUp).Row
+            If LastRow <> 1 Then
+                ws.Range("A2:A" & LastRow).Select
+                Selection.EntireRow.Delete Shift:=xlUp
+            End If
+            
+            ws.Range("A1").Select
+            Selection.AutoFilter
+            
+        End If
+
+    Next ws
+
+  
+
+
+
+ End If
+ 
+    
+ Set PivotWorkbook = ActiveWorkbook
+    
+    For Each ws In PivotWorkbook.Worksheets
+           
+        For Each pvt In ws.PivotTables
+             pvt.RefreshTable
+        Next pvt
+    
+    Next ws
+
+    '''''''''''''''''''''''
+If SL = "EAS"  Then
+
+ActiveWorkbook.Sheets("Total_BE_Summary_Current").Activate
+
+
+
+
+
+Range("A1").Select
+ActiveCell.FormulaR1C1 = Currqtr  & " " & "Total BE Summary- Americas"
+
+Dim pf As PivotField
+Dim pt As PivotTable
+Set pt = ActiveSheet.PivotTables(1)
+
+For Each pf In pt.DataFields
+
+    If pf.SourceName = "Prev Qtr Actuals" Then
+   
+      pf.Caption = Prevqtr & " " & "Actuals (31-Mar-2018) (KUSD) "
+     Else
+      pf.Caption = Currqtr & " " & pf.SourceName
+    End If
+    
+Next pf
+
+ActiveWorkbook.Sheets("Total_BE_Summary_Future").Activate
+
+Set pt = ActiveSheet.PivotTables(1)
+
+For Each pf In pt.DataFields
+
+          pf.Caption = Futureqtr & " " & pf.SourceName
+    
+Next pf
+
+Range("A1").Select
+ActiveCell.FormulaR1C1 = Futureqtr  & " " & "Total BE Summary- Americas"
+
+
+Dim WorkS As Worksheet
+
+For Each WorkS In Sheets
+
+  If WorkS.Name = "Total_BE_Summary_Current" Then
+  
+  Sheets("Total_BE_Summary_Current").Name = "Total_BE_Summary_" & Currqtr
+  
+  ElseIf WorkS.Name = "Total_BE_Summary_Future" Then
+  
+  Sheets("Total_BE_Summary_Future").Name = "Total_BE_Summary_" & Futureqtr
+  
+  ElseIf WorkS.Name = "BE_Summary_Data_Current" Then
+  
+  Sheets("BE_Summary_Data_Current").Name = "BE_Summary_Data_" & Currqtr
+  
+  ElseIf WorkS.Name = "BE_Summary_Data_Future" Then
+  
+  Sheets("BE_Summary_Data_Future").Name = "BE_Summary_Data_" & Futureqtr
+  
+  End If
+ 
+  
+   
+Next WorkS
+
+End If
+
+
+
+
+
+
+ActiveWorkbook.Sheets("Read Me").Activate
+
+If SL <> "EAS"  Then
+
+Range("B2").Select
+ActiveCell.FormulaR1C1 = SL & " Americas"
+
+Range("E7").Select
+ActiveCell.FormulaR1C1 =   "For " & SL & ", NSO and Digital are synonymous"
+
+Else
+
+Dim LString As String
+Dim LArray() As String
+
+LString = Currqtr
+LArray = Split(LString, "'")
+
+
+Range("C5").Select
+ActiveCell.FormulaR1C1 =  "Total_BE_Summary_" & Currqtr
+Selection.Hyperlinks(1).SubAddress = "'Total_BE_Summary_" & LArray(0) & "''" & LArray(1) & "'!A1"
+
+Range("C11").Select
+ActiveCell.FormulaR1C1 =  "BE_Summary_Data_" & Currqtr
+Selection.Hyperlinks(1).SubAddress = "'BE_Summary_Data_" & LArray(0) & "''" & LArray(1) & "'!A1"
+
+
+LString = Futureqtr
+LArray = Split(LString, "'")
+ 
+
+Range("C6").Select
+ActiveCell.FormulaR1C1 =  "Total_BE_Summary_" & Futureqtr
+Selection.Hyperlinks(1).SubAddress = "'Total_BE_Summary_" & LArray(0) & "''" & LArray(1) & "'!A1"
+
+
+Range("C12").Select
+ActiveCell.FormulaR1C1 =  "BE_Summary_Data_" & Futureqtr
+Selection.Hyperlinks(1).SubAddress = "'BE_Summary_Data_" & LArray(0) & "''" & LArray(1) & "'!A1"
+
+
+
+End If
+    
+
+    
+  'Set Excelperm = ActiveWorkbook.Permission
+  'Set UserPerm = Excelperm.Add("Everyone", msoPermissionChange + msoPermissionObjModel)
+  'UserPerm.ExpirationDate = Date + 60
+      
+
+    
+    'ActiveWorkbook.SaveAs Filename:=ThisWorkbook.Path & "\" & sname & "_" & "Americas_Sales_Dashboard.xlsm"
+    'ActiveWorkbook.Close savechanges:=True
+    'ActiveWorkbook.Close 
+
+
+ With ActiveWorkbook.VBProject
+    .vbcomponents.Remove .vbcomponents("Module1")
+    '.vbcomponents.Remove .vbcomponents("")
+    '.vbcomponents.Remove .vbcomponents("")
+ End With 
+
+
+
+
+ 

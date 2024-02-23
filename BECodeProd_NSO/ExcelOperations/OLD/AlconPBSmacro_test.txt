@@ -1,0 +1,424 @@
+
+Set wks = Worksheets.Add
+ActiveSheet.Name = "MCC_Summary"
+
+   With wks
+ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:= _
+       "Data!A:N", Version:=xlPivotTableVersion14). _
+        CreatePivotTable TableDestination:=Sheets("MCC_Summary").Range("A1"), TableName:="PivotTable1", _
+        DefaultVersion:=xlPivotTableVersion14
+End With
+
+ 
+    Cells(1, 1).Select
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("ServiceLine")
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("PU")
+        .Orientation = xlRowField
+        .Position = 2
+    End With
+    ActiveSheet.PivotTables("PivotTable1").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable1").PivotFields("BE Volume"), "Count of BE Volume", xlCount
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("Count of BE Volume")
+        .Caption = "Sum of BE Volume"
+        .Function = xlSum
+    End With
+    ActiveSheet.PivotTables("PivotTable1").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable1").PivotFields("Alcon"), "Count of Alcon", xlCount
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("Count of Alcon")
+        .Caption = "Sum of Alcon"
+        .Function = xlSum
+    End With
+    ActiveSheet.PivotTables("PivotTable1").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable1").PivotFields("PBS"), "Count of PBS", xlCount
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("Count of PBS")
+        .Caption = "Sum of PBS"
+        .Function = xlSum
+    End With
+    ActiveSheet.PivotTables("PivotTable1").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable1").PivotFields("Actuals"), "Count of Actuals", xlCount
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("Count of Actuals")
+        .Caption = "Sum of Actuals"
+        .Function = xlSum
+    End With
+    ActiveSheet.PivotTables("PivotTable1").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable1").PivotFields("Actuals - BE"), "Count of Actuals - BE", xlCount
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("Count of Actuals - BE" _
+        )
+        .Caption = "GAP( Actuals - BE)"
+        .Function = xlSum
+    End With
+    ActiveSheet.PivotTables("PivotTable1").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable1").PivotFields("Actuals - Alcon"), "Count of Actuals - Alcon", _
+        xlCount
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields( _
+        "Count of Actuals - Alcon")
+        .Caption = "GAP(Actuals - Alcon)"
+        .Function = xlSum
+    End With
+    ActiveSheet.PivotTables("PivotTable1").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable1").PivotFields("Actuals - PBS"), "Count of Actuals - PBS", xlCount
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields( _
+        "Count of Actuals - PBS")
+        .Caption = "GAP(Actuals - PBS)"
+        .Function = xlSum
+    End With
+  
+    Range("B4").Select
+    ActiveWindow.SmallScroll Down:=-12
+    Range("B3").Select
+    With ActiveSheet.PivotTables("PivotTable1")
+        .InGridDropZones = True
+        .RowAxisLayout xlTabularRow
+    End With
+    ActiveWorkbook.ShowPivotTableFieldList = False
+    ActiveWindow.SmallScroll Down:=0
+
+
+ With ActiveSheet.PivotTables("PivotTable1").PivotFields( _
+        "Serviceline")
+        .PivotItems("(blank)").Visible = False
+    End With
+    
+    Set wks = Worksheets.Add
+ActiveSheet.Name = "ProjectType_Summary"
+
+   With wks
+ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:= _
+       "DataProjectCode!A:N", Version:=xlPivotTableVersion15). _
+       CreatePivotTable TableDestination:=Sheets("ProjectType_Summary").Range("A1"), TableName:="PivotTable2", _
+        DefaultVersion:=xlPivotTableVersion15
+   
+End With
+
+    Cells(1, 1).Select
+    ActiveWorkbook.ShowPivotTableFieldList = True
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("Serviceline")
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("PU")
+        .Orientation = xlRowField
+        .Position = 2
+    End With
+ 
+    Sheets("ProjectType_Summary").Select
+    Range("D15").Select
+    'Windows("AlconPBSVSActualsComparison.xlsx").Activate
+    ActiveSheet.PivotTables("PivotTable2").AddDataField ActiveSheet.PivotTables( _
+        "PivotTable2").PivotFields("Actuals"), "Count of Actuals", xlCount
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("Count of Actuals")
+        .Caption = "Sum of Actuals"
+        .Function = xlSum
+    End With
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("ProjectType")
+        .Orientation = xlColumnField
+        .Position = 1
+    End With
+    Range("C6").Select
+    With ActiveSheet.PivotTables("PivotTable2")
+        .InGridDropZones = True
+        .RowAxisLayout xlTabularRow
+    End With
+    ActiveSheet.PivotTables("PivotTable2").PivotSelect "", xlDataAndLabel, True
+    Range("A1").Select
+    ActiveSheet.PivotTables("PivotTable2").DataPivotField.PivotItems( _
+        "Sum of Actuals").Caption = " "
+    Range("F11").Select
+    ActiveWorkbook.ShowPivotTableFieldList = False
+    ActiveWindow.SmallScroll Down:=-3
+    ActiveSheet.PivotTables("PivotTable2").PivotSelect "Serviceline[All]", _
+        xlLabelOnly, True
+    Range("A2").Select
+    Sheets("Data").Select
+    ActiveWindow.ScrollColumn = 2
+
+ 
+    Columns("A:N").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Range("B2").Select
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 3
+    Range("H1:N1").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent6
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    Columns("H:N").Select
+    Selection.NumberFormat = "0.00"
+    Range("P14").Select
+    Sheets("DataProjectCode").Select
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 1
+    Columns("A:N").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 3
+    Range("J1:N1").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent6
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+    Columns("J:N").Select
+    Selection.NumberFormat = "0.00"
+    Range("O14").Select
+    ActiveWindow.ScrollColumn = 2
+    ActiveWindow.ScrollColumn = 1
+    
+    Range("A2").Select
+
+ActiveWindow.DisplayGridlines = False
+    Columns("A:G").Select
+    Selection.NumberFormat = "0.00"
+    Sheets("MCC_Summary").Select
+    Columns("A:I").Select
+    ActiveWindow.DisplayGridlines = False
+    Selection.NumberFormat = "0.00"
+    Selection.ColumnWidth = 15
+    Rows("2:2").Select
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlBottom
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    ActiveSheet.PivotTables("PivotTable1").PivotSelect "'Sum of Actuals - BE'", _
+        xlDataAndLabel, True
+    ActiveSheet.PivotTables("PivotTable1").DataPivotField.PivotItems( _
+        "Sum of Actuals - BE").Caption = "GAP( Actuals - BE)"
+    Range("H2").Select
+    ActiveSheet.PivotTables("PivotTable1").DataPivotField.PivotItems( _
+        "Sum of Actuals - Alcon").Caption = "GAP( Actuals - Alcon)"
+    Range("I2").Select
+    ActiveSheet.PivotTables("PivotTable1").DataPivotField.PivotItems( _
+        "Sum of Actuals - PBS").Caption = "GAP( Actuals - PBS)"
+    Range("C2").Select
+    ActiveSheet.PivotTables("PivotTable1").DataPivotField.PivotItems( _
+        "Sum of BE Volume").Caption = "Volume"
+    Range("D2").Select
+    ActiveSheet.PivotTables("PivotTable1").DataPivotField.PivotItems("Sum of Alcon" _
+        ).Caption = " Alcon"
+    Range("E2").Select
+    ActiveSheet.PivotTables("PivotTable1").DataPivotField.PivotItems("Sum of PBS"). _
+        Caption = " PBS"
+    Range("F2").Select
+    ActiveSheet.PivotTables("PivotTable1").DataPivotField.PivotItems( _
+        "Sum of Actuals").Caption = " Actuals"
+    Columns("A:I").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Selection.ColumnWidth = 15
+    Range("C5").Select
+    Sheets("ProjectType_Summary").Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Selection.ColumnWidth = 14
+    Range("F11").Select
+    Sheets("DataProjectCode").Select
+    Sheets("DataProjectCode").Move Before:=Sheets(2)
+    Sheets("DataProjectCode").Select
+    Sheets("DataProjectCode").Name = "Data@ProjectCode"
+    Sheets("Data").Select
+    Sheets("Data").Name = "Data"
+    Sheets("Data").Select
+    Sheets("Data").Name = "Data@MCC"
+    Sheets("ProjectType_Summary").Select
+    Range("A2").Select
+Sheets("MCC_Summary").Select
+    Sheets("MCC_Summary").Move Before:=Sheets(1)
+    Sheets("Data@MCC").Select
+    Sheets("Data@MCC").Move Before:=Sheets(2)
+    Sheets("ProjectType_Summary").Select
+    Columns("A:G").Select
+    Selection.NumberFormat = "0.00"
+    Range("I15").Select
+    Sheets("Data@ProjectCode").Select
+    Range("A2").Select
+    Sheets("ProjectType_Summary").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotSelect "Serviceline[All]", _
+        xlLabelOnly, True
+    Range("A1").Select
+    Sheets("ProjectType_Summary").Select
+    Columns("A:G").Select
+    ActiveWindow.DisplayGridlines = False
+    Range("H12").Select
+    Sheets("MCC_Summary").Select
+    Range("A1").Select
+Sheets("MCC_Summary").Select
+    Columns("A:I").Select
+    Selection.ColumnWidth = 10
+    Rows("2:2").Select
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection
+        .HorizontalAlignment = xlGeneral
+        .VerticalAlignment = xlCenter
+        .WrapText = True
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Range("J12").Select
+    ActiveWindow.SmallScroll Down:=-6
+    ActiveSheet.PivotTables("PivotTable1").PivotSelect "", xlOrigin, True
+    Range("A2").Select
+
+
+Sheets("ProjectType_Summary").Select
+	Range("A:G").Select
+    Range("E5").Activate
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+
+Sheets("Data@MCC").Select
+Range("A1").Select
+Sheets("ProjectType_Summary").Select
+Range("A1").Select
+Sheets("Data@ProjectCode").Select
+Range("A1").Select
+Sheets("MCC_Summary").Select
+Range("A1").Select

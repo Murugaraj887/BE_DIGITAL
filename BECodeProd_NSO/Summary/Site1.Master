@@ -1,0 +1,130 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="BECodeProd.Summary.Site1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+    <script type="text/javascript">
+
+
+        function OpenPageUploadGuidelines() {
+            debugger;
+            var left = (screen.width - 800) / 2;
+            var top = (screen.height - 500) / 2;
+
+            window.open('EAS_BE_Portal_FAQ.pdf', 'pop', 'left = ' + left + ', top=' + top + ', width=800, height=500, menubar=no, scrollbars=yes, resizable=yes');
+
+            return false;
+        }
+
+    </script>
+</head>
+<body style="padding: 0px; width: 100%; height: 100%; background-color:White">
+    <form id="frmHome" runat="server" title="">
+    <asp:ScriptManager ID="scriptmgr" ScriptMode="Release" runat="server" EnablePageMethods="true">
+    </asp:ScriptManager>
+   
+    <table  border="0" cellspacing="0" cellpadding="0" align="center" width="100%" style="padding: 0px;
+        margin: 0px; height: 100%;">
+        <tr id="Masterheader" runat ="server" valign="bottom">
+            <td valign="top" style="background-color:rgb(51, 51, 51); width: 100%;">
+              <div id="SiteMap1" runat="server">
+              
+                <table   style="width: 100%;">
+                    <tr>
+                        <td align="left">
+                            <div style="float: left">
+
+                              <div style="margin-left: 10px;float:left">
+                                    <asp:LinkButton ID="lnkSummary" Text="Summary" Font-Names="Calibri"  Font-Size="12px" Visible="false"
+                                        Font-Bold="True" ForeColor="floralwhite" runat="server" 
+                                        Font-Underline="True" OnClick="btnSummary_Click"></asp:LinkButton></div>
+                                <div style="margin-left: 10px;float:left">
+                                    <asp:LinkButton ID="hypSignOut" Text="Digital BE Update" Font-Names="Calibri"  Font-Size="12px"
+                                        Font-Bold="True" ForeColor="White"
+                                        runat="server" Font-Underline="True" OnClick="hypSignOut_Click"></asp:LinkButton></div>
+                                <%--  <asp:LinkButton ID="hypAdmin" Text="Admin" Font-Names="Calibri" Font-Size="11px" Font-Bold="True"
+                                ForeColor="#FFCB8B" runat="server" OnClientClick="NavigateTO('BEAdmin.aspx');"
+                                Font-Underline="True" OnClick="hypAdmin_Click"></asp:LinkButton>--%>
+                                 <div style="margin-left: 10px;float:left">
+                                    <asp:LinkButton ID="hypSwitchUser" Text="Switch User" Font-Names="Calibri"  Font-Size="12px"
+                                        Font-Bold="True" ForeColor="White" runat="server" 
+                                        Font-Underline="True" OnClick="hypSwitchUser_Click"></asp:LinkButton></div>
+                                <div style="margin-left: 10px;float:left">
+                                    <asp:LinkButton ID="lnkUplaod" Text="Data Upload" Font-Names="Calibri"  Font-Size="12px"
+                                        Font-Bold="True" ForeColor="White" runat="server" Visible="false" Font-Underline="True"
+                                        OnClick="lnkUplaod_Click"></asp:LinkButton></div>
+                                 <div style="margin-left: 10px;float:left">
+                                    <asp:LinkButton ID="lnkbtnMCCDMSDM" Text="MCCDMSDM" Font-Names="Calibri"  Font-Size="12px"
+                                        Font-Bold="True" ForeColor="White" runat="server" Visible="false" Font-Underline="True"
+                                        OnClick="lnkbtnMCCDMSDM_Click"></asp:LinkButton></div>
+                                 <div style="margin-left: 10px;float:left">
+                                    <asp:LinkButton ID="lnkbtnBEAdmin" Text="Digital Admin" Font-Names="Calibri"  Font-Size="12px"
+                                        Font-Bold="True" ForeColor="White" runat="server" Visible="false" Font-Underline="True"
+                                        OnClick="lnkbtnBEAdmin_Click"></asp:LinkButton></div>
+                                <div style="margin-left: 10px;float:left">
+                                    <asp:LinkButton ID="lnkBtnFAQ" Text="FAQ" Font-Names="Calibri"  Font-Size="12px" Font-Bold="True"
+                                        ForeColor="White" runat="server" Visible="true" OnClientClick="return OpenPageUploadGuidelines();"
+                                        Font-Underline="True"></asp:LinkButton></div>
+                                <div style="margin-left: 10px;float:left">
+                                    <asp:Button ID="btnBE" CssClass="hand" runat="server" Text=" BE" BackColor="#C41502"
+                                        Visible="false" Font-Bold="true" Font-Names="Calibri" ForeColor="White" BorderWidth="0px"
+                                        Height="17px" Enabled="true" Font-Size="12px" Width="90px" OnClick="btnBE_Click1" /></div>
+                               <div style="margin-left: 10px;float:left">
+                                <asp:LinkButton ID="btnReport" Text="Digital Reports" Font-Names="Calibri"  Font-Size="12px"
+                                    Font-Bold="True" ForeColor="floralwhite" runat="server" Visible="true" Font-Underline="True"
+                                    OnClick="btnupload_Click"></asp:LinkButton></div>
+                            </div>
+                            
+                           
+                            <div style="float: right; margin-right: 20px">
+                                <asp:Label ID="lb" runat="server" ForeColor="White" Font-Names="Calibri"  Font-Size="12px"
+                                    Font-Bold="True" Text="Role as"></asp:Label>
+                                <asp:Label ID="lblWelcome" runat="server" Font-Names="Calibri"  Font-Size="12px" Font-Bold="True"
+                                    ForeColor="White"></asp:Label></div>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+            </td>
+        </tr>
+        <tr style="height: 100%">
+            <td colspan="3" valign="top">
+                <table border="0" cellspacing="0" cellpadding="0" align="left" width="100%">
+                    <tr valign="top">
+                        <%-- <td style="height: 320px; background-color: White" valign="top">
+                            <table>
+                                <tr>
+                                    <td colspan="2">
+                                        <div style="overflow: auto; height: 480px; width: 1px;" align="left">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>--%>
+                        <td style="width: 100%; height: 100%; background-color: White; vertical-align: top;">
+                            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+        </tr>
+    </table>
+    
+    </form>
+    <script type="text/javascript" language="javascript">
+        function OnClick() {
+            if (divCalendar.style.display == "none")
+                divCalendar.style.display = "";
+            else
+                divCalendar.style.display = "none";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+  <html><head><title></title><style type="text/css"> .Error { background-color: #e3a8a8;   color: Black;  font-size: smaller; }.Info { background-color: #c7dec9;  color: Black;  font-size: smaller;   } .Warning { background-color: #f7f76c;  color: #000000;  font-size: smaller;  } </style></head><body>   <form id="form1" runat="server" > <table width="100%" style="font-family: Verdana; font-size: small;"><tr style="background-color: black; font-size: medium; color: White; font-weight: bold;"><td style="width: 7%">Time  </td> <td style="width: 20%">   Source   </td>   <td>Message, Stack Trace , Information   </td>  </tr> <tr class="Info"><td>9:07 AM</td> <td><b> BEData.Login</b><br /> <i style="font-size: smaller"> btnLogin_Click  </i></td><td> <b>Thread was being aborted.</b> <br />  <i>    at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Login.btnLogin_Click(Object sender, EventArgs e) in \\nebula\BackupFolder_OldAPPs\DataLoad_bkup\FilesSharing\vikranth\Source Code Digital BE APP\BEAPP\BECodeProd_NSO\Login.aspx.cs:line 272 </i>  /</td></tr>

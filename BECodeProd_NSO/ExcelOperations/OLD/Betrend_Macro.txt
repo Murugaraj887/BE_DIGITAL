@@ -1,0 +1,165 @@
+
+
+
+
+Dim sht As Worksheet
+Sheets("Revenue").Activate
+ActiveSheet.PivotTables("PivotTable2").PivotCache.Refresh
+Sheets("Volume").Activate
+ActiveSheet.PivotTables("PivotTable2").PivotCache.Refresh
+
+Set sht = Sheets("BE Max Week")
+sht.Select
+Dim result As String
+result = Range("A1").Value
+
+Sheets("Year").Select
+Dim year As String
+year = Range("A1").Value
+
+Dim Weeks(1 To 14) As String
+        
+Dim i As Integer
+Sheets("Revenue").Select
+
+For i = 1 To 14
+     Weeks(i) = sht.Cells(i, 2).Value
+     If Weeks(i) <> "" Then
+     RenamePivotWeek (Weeks(i))
+     End If
+     
+Next i
+
+
+   ActiveSheet.PivotTables("PivotTable2").DataPivotField.PivotItems( _
+        "Variance wrt W13 BE").Caption = "Variance wrt W" + result + " BE"
+
+ ActiveSheet.PivotTables("PivotTable2").DataPivotField.PivotItems( _
+        "BE( 31st Mar Ex Rate)").Caption = "BE( 31st Mar " + year + " Ex Rate)"
+
+
+ActiveSheet.PivotTables("PivotTable2").DataPivotField.PivotItems( _
+        "Actuals (31st Mar Ex Rate)").Caption = "Actuals ( 31st Mar " + year + " Ex Rate)"
+
+        
+
+
+Sheets("Volume").Select
+For i = 1 To 14
+     Weeks(i) = sht.Cells(i, 2).Value
+     
+        If Weeks(i) <> "" Then
+     RenamePivotWeek (Weeks(i))
+     End If
+Next i
+
+ ActiveSheet.PivotTables("PivotTable2").DataPivotField.PivotItems( _
+        "Variance wrt W13 Vol").Caption = "Variance wrt W" + result + " Vol"
+    
+        
+    Range("A1").Select
+    Sheets("BE Max Week").Visible = xlSheetVeryHidden
+    Sheets("Year").Visible = xlSheetVeryHidden
+
+End Sub
+
+
+Function RenamePivotWeek(x As Integer)
+
+     Select Case x
+     Case Is = 0
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("0"). _
+        Caption = "W0"
+     Case Is = 1
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("1"). _
+        Caption = "W1"
+    
+     Case Is = 2
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("2"). _
+        Caption = "W2"
+        
+         Case Is = 3
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("3"). _
+        Caption = "W3"
+        
+         Case Is = 4
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("4"). _
+        Caption = "W4"
+        
+         Case Is = 5
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("5"). _
+        Caption = "W5"
+        
+         Case Is = 6
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("6"). _
+        Caption = "W6"
+        
+         Case Is = 7
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("7"). _
+        Caption = "W7"
+        
+        
+     Case Is = 8
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("8"). _
+        Caption = "W8"
+        
+         Case Is = 9
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("9"). _
+        Caption = "W9"
+        
+         Case Is = 10
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("10"). _
+        Caption = "W10"
+        
+         Case Is = 11
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("11"). _
+        Caption = "W11"
+    
+     Case Is = 12
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("12"). _
+        Caption = "W12"
+        
+         Case Is = 13
+         
+    Range("A23").Select
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("Week").PivotItems("13"). _
+        Caption = "W13"
+    
+     Case Else
+         
+End Select
+
+
+
+End Function
+
+
+
+
+

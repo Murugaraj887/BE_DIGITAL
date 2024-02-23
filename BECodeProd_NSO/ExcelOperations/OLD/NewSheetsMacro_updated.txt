@@ -1,0 +1,540 @@
+
+
+
+
+
+
+
+
+
+
+Dim Pt1, Pt2, Pt3 As PivotTable
+Dim PF1, PF2, PF3, PF4, PF5, PF6, PF7, PF8, PF9, PF10, PF11, PF12, PF13, PF14, PF15, PF16, PF17, PF18, PF19, PF20, PF21, PF22, PF23, PF24, PF25, PF26, PF27, PF28, PF29, PF30, PF31, PF32, PF33, PF34, PF35, PF36, PF37, PF38, PF39, PF40, PF41, PF42, PF43, PF44, PF45, PF46, PF47, PF48 As PivotField
+
+sCol1 = Sheets("BE_Data").Cells.Range("T1").Value  ' currM1 BE
+sCol2 = Sheets("BE_Data").Cells.Range("U1").Value ' currM2 BE
+sCol3 = Sheets("BE_Data").Cells.Range("V1").Value ' currM3 BE
+sCol4 = Sheets("BE_Data").Cells.Range("X1").Value ' prevM1 BE
+sCol5 = Sheets("BE_Data").Cells.Range("Y1").Value ' prevM2 BE
+sCol6 = Sheets("BE_Data").Cells.Range("Z1").Value ' prevM3 BE
+
+sCol7 = Sheets("BE_Data").Cells.Range("AB1").Value ' currM1 Finpulse
+sCol8 = Sheets("BE_Data").Cells.Range("AC1").Value ' currM2 Finpulse
+sCol9 = Sheets("BE_Data").Cells.Range("AD1").Value ' currM3 Finpulse
+sCol10 = Sheets("BE_Data").Cells.Range("AE1").Value ' prevM1 Finpulse
+sCol11 = Sheets("BE_Data").Cells.Range("AF1").Value ' prevM2 Finpulse
+sCol12 = Sheets("BE_Data").Cells.Range("AG1").Value ' prevM3 Finpulse
+
+sCol13 = Sheets("BE_Data").Cells.Range("AH1").Value ' currM1 BEVOL
+sCol14 = Sheets("BE_Data").Cells.Range("AI1").Value ' currM2 BEVOL
+sCol15 = Sheets("BE_Data").Cells.Range("AJ1").Value ' currM3 BEVOL
+sCol16 = Sheets("BE_Data").Cells.Range("AK1").Value ' prevM1 BEVOL
+sCol17 = Sheets("BE_Data").Cells.Range("AL1").Value ' prevM2 BEVOL
+sCol18 = Sheets("BE_Data").Cells.Range("AM1").Value ' prevM3 BEVOL
+
+sCol19 = Sheets("BE_Data").Cells.Range("AN1").Value ' currM1 ALCON Volume
+sCol20 = Sheets("BE_Data").Cells.Range("AO1").Value ' currM2 ALCON Volume
+sCol21 = Sheets("BE_Data").Cells.Range("AP1").Value ' currM3 ALCON Volume
+sCol22 = Sheets("BE_Data").Cells.Range("AQ1").Value ' prevM1 ALCON Volume
+sCol23 = Sheets("BE_Data").Cells.Range("AR1").Value ' prevM2 ALCON Volume
+sCol24 = Sheets("BE_Data").Cells.Range("AS1").Value ' prevM3 ALCON Volume
+
+sCol25 = Sheets("BE_Data").Cells.Range("AT1").Value ' currM1 PBS
+sCol26 = Sheets("BE_Data").Cells.Range("AU1").Value ' currM2 PBS
+sCol27 = Sheets("BE_Data").Cells.Range("AV1").Value ' currM3 PBS
+sCol28 = Sheets("BE_Data").Cells.Range("AW1").Value ' prevM1 PBS
+sCol29 = Sheets("BE_Data").Cells.Range("AX1").Value ' prevM2 PBS
+sCol30 = Sheets("BE_Data").Cells.Range("AY1").Value ' prevM3 PBS
+
+sCol31 = Sheets("BE_Data").Cells.Range("AZ1").Value ' currM1 Billed Months
+sCol32 = Sheets("BE_Data").Cells.Range("BA1").Value ' currM2 Billed Months
+sCol33 = Sheets("BE_Data").Cells.Range("BB1").Value ' currM3 Billed Months
+sCol34 = Sheets("BE_Data").Cells.Range("BC1").Value ' prevM1 Billed Months
+sCol35 = Sheets("BE_Data").Cells.Range("BD1").Value ' prevM2 Billed Months
+sCol36 = Sheets("BE_Data").Cells.Range("BE1").Value ' prevM3 Billed Months
+
+sCol37 = Sheets("BE_Data").Cells.Range("BF1").Value ' currM1 RTBR
+sCol38 = Sheets("BE_Data").Cells.Range("BG1").Value ' currM2 RTBR
+sCol39 = Sheets("BE_Data").Cells.Range("BH1").Value ' currM3 RTBR
+sCol40 = Sheets("BE_Data").Cells.Range("BI1").Value ' prevM1 RTBR
+sCol41 = Sheets("BE_Data").Cells.Range("BJ1").Value ' prevM2 RTBR
+sCol42 = Sheets("BE_Data").Cells.Range("BK1").Value ' prevM3 RTBR
+
+
+Sheets.Add
+    ActiveSheet.Name = "RevActual"
+
+    ActiveWorkbook.PivotCaches.Add(SourceType:=xlDatabase, SourceData:= _
+        "BE_Data!$A:$BM").CreatePivotTable _
+        TableDestination:=Sheets("RevActual").Range("A3"), TableName:="PivotTable1", DefaultVersion _
+        :=xlPivotTableVersion10
+
+Set Pt1 = ActiveSheet.PivotTables("PivotTable1")
+
+    Sheets("RevActual").Select
+    Cells(3, 1).Select
+
+        
+
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("ServiceLine")
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("PU")
+        .Orientation = xlRowField
+        .Position = 2
+    End With
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("Vertical")
+        .Orientation = xlRowField
+        .Position = 3
+    End With
+
+         
+
+    ActiveSheet.PivotTables("PivotTable1").PivotFields("ServiceLine").Subtotals = _
+        Array(False, False, False, False, False, False, False, False, False, False, False, False)
+    ActiveSheet.PivotTables("PivotTable1").PivotFields("ServiceLine").LayoutForm = _
+        xlTabular
+    ActiveSheet.PivotTables("PivotTable1").PivotFields("PU").Subtotals = Array( _
+        False, False, False, False, False, False, False, False, False, False, False, False)
+    ActiveSheet.PivotTables("PivotTable1").PivotFields("PU").LayoutForm = xlTabular
+    
+    Pt1.PivotFields("ServiceLine").ShowDetail = False
+    Pt1.PivotFields("PU").ShowDetail = False
+    
+           sCol04 = Left(sCol4, 8)
+         Set PF1 = Pt1.PivotFields(sCol4)
+    Pt1.AddDataField PF1, sCol04 & " ", xlSum
+   
+        sCol05 = Left(sCol5, 8)
+         Set PF2 = Pt1.PivotFields(sCol5)
+    Pt1.AddDataField PF2, sCol05 & " ", xlSum
+
+        sCol06 = Left(sCol6, 8)
+         Set PF3 = Pt1.PivotFields(sCol6)
+    Pt1.AddDataField PF3, sCol06 & " ", xlSum
+        
+         sCol01 = Left(sCol1, 8)
+         Set PF4 = Pt1.PivotFields(sCol1)
+    Pt1.AddDataField PF4, sCol01 & " ", xlSum
+   
+        sCol02 = Left(sCol2, 8)
+         Set PF5 = Pt1.PivotFields(sCol2)
+    Pt1.AddDataField PF5, sCol02 & " ", xlSum
+
+        sCol03 = Left(sCol3, 8)
+         Set PF6 = Pt1.PivotFields(sCol3)
+    Pt1.AddDataField PF6, sCol03 & " ", xlSum
+
+    sCol010 = Left(sCol10, 14)
+         Set PF7 = Pt1.PivotFields(sCol10)
+    Pt1.AddDataField PF7, sCol010 & " ", xlSum
+
+   sCol011 = Left(sCol11, 14)
+         Set PF8 = Pt1.PivotFields(sCol11)
+    Pt1.AddDataField PF8, sCol011 & " ", xlSum
+  
+    
+         sCol012 = Left(sCol12, 14)
+         Set PF9 = Pt1.PivotFields(sCol12)
+    Pt1.AddDataField PF9, sCol012 & " ", xlSum
+        
+   sCol07 = Left(sCol7, 14)
+         Set PF10 = Pt1.PivotFields(sCol7)
+    Pt1.AddDataField PF10, sCol07 & " ", xlSum
+ 
+   sCol08 = Left(sCol8, 14)
+         Set PF11 = Pt1.PivotFields(sCol8)
+    Pt1.AddDataField PF11, sCol08 & " ", xlSum
+    
+        sCol09 = Left(sCol9, 14)
+         Set PF12 = Pt1.PivotFields(sCol9)
+    Pt1.AddDataField PF12, sCol09 & " ", xlSum
+            
+        With ActiveSheet.PivotTables("PivotTable1").DataPivotField
+        .Orientation = xlColumnField
+        .Position = 1
+    End With
+    
+ With ActiveSheet.PivotTables("PivotTable1").PivotFields("ServiceLine")
+        .PivotItems("(blank)").Visible = False
+ End With
+
+    ActiveSheet.PivotTables("PivotTable1").PivotSelect "", xlDataAndLabel, True
+    With Selection.Font
+        .Name = "Arial"
+        .Size = 11
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Arial"
+        .Size = 8
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+
+    ActiveSheet.PivotTables("PivotTable1").TableStyle2 = "PivotStyleMedium2"
+
+    ActiveWindow.DisplayGridlines = False
+
+    Sheets("BE_Data").Select
+    Range("A1").Select
+
+    Sheets.Add
+        ActiveSheet.Name = "VolAlconPBSActuals"
+   
+    ActiveWorkbook.PivotCaches.Add(SourceType:=xlDatabase, SourceData:= _
+        "BE_Data!$A:$BM").CreatePivotTable _
+        TableDestination:=Sheets("VolAlconPBSActuals").Range("A3"), TableName:="PivotTable2", DefaultVersion _
+        :=xlPivotTableVersion10
+
+ Set Pt2 = ActiveSheet.PivotTables("PivotTable2")
+    Sheets("VolAlconPBSActuals").Select
+    Cells(3, 1).Select
+
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("ServiceLine")
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("PU")
+        .Orientation = xlRowField
+        .Position = 2
+    End With
+    With ActiveSheet.PivotTables("PivotTable2").PivotFields("Vertical")
+        .Orientation = xlRowField
+        .Position = 3
+    End With
+         
+
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("ServiceLine").Subtotals = _
+        Array(False, False, False, False, False, False, False, False, False, False, False, False)
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("ServiceLine").LayoutForm = _
+        xlTabular
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("PU").Subtotals = Array( _
+        False, False, False, False, False, False, False, False, False, False, False, False)
+    ActiveSheet.PivotTables("PivotTable2").PivotFields("PU").LayoutForm = xlTabular
+    
+    
+    Pt2.PivotFields("ServiceLine").ShowDetail = False
+    Pt2.PivotFields("PU").ShowDetail = False
+
+     
+    sCol016 = "BEVol" + Mid(sCol16, 18, 6)
+         Set PF13 = Pt2.PivotFields(sCol16)
+    Pt2.AddDataField PF13, sCol016 & " ", xlSum
+
+    sCol017 = "BEVol" + Mid(sCol17, 18, 6)
+         Set PF14 = Pt2.PivotFields(sCol17)
+    Pt2.AddDataField PF14, sCol017 & " ", xlSum
+
+   sCol018 = "BEVol" + Mid(sCol18, 18, 6)
+         Set PF15 = Pt2.PivotFields(sCol18)
+    Pt2.AddDataField PF15, sCol018 & " ", xlSum
+  
+    
+         'sColAlocn1 = Mid(sCol13, 5, 11)
+         Set PF16 = Pt2.PivotFields(sCol13)
+    Pt2.AddDataField PF16, sCol13 & " ", xlSum
+        
+   'sCol07 = Mid(sCol14, 18, 5)
+         Set PF17 = Pt2.PivotFields(sCol14)
+    Pt2.AddDataField PF17, sCol14 & " ", xlSum
+ 
+   'sCol08 = Mid(sCol15, 18, 5)
+         Set PF18 = Pt2.PivotFields(sCol15)
+    Pt2.AddDataField PF18, sCol15 & " ", xlSum
+
+     sColAlocn1 = Mid(sCol22, 5, 12)
+         Set PF19 = Pt2.PivotFields(sCol22)
+    Pt2.AddDataField PF19, sColAlocn1 & " ", xlSum
+        
+   sColAlocn2 = Mid(sCol23, 5, 12)
+         Set PF20 = Pt2.PivotFields(sCol23)
+    Pt2.AddDataField PF20, sColAlocn2 & " ", xlSum
+ 
+   sColAlocn3 = Mid(sCol24, 5, 12)
+         Set PF21 = Pt2.PivotFields(sCol24)
+    Pt2.AddDataField PF21, sColAlocn3 & " ", xlSum
+    
+     sColAlocn4 = Left(sCol19, 12)
+         Set PF22 = Pt2.PivotFields(sCol19)
+    Pt2.AddDataField PF22, sColAlocn4 & " ", xlSum
+        
+   sColAlocn5 = Left(sCol20, 12)
+         Set PF23 = Pt2.PivotFields(sCol20)
+    Pt2.AddDataField PF23, sColAlocn5 & " ", xlSum
+ 
+   sColAlocn6 = Left(sCol21, 12)
+         Set PF24 = Pt2.PivotFields(sCol21)
+    Pt2.AddDataField PF24, sColAlocn6 & " ", xlSum
+    
+    sColPBS1 = Left(sCol28, 9)
+         Set PF25 = Pt2.PivotFields(sCol28)
+    Pt2.AddDataField PF25, sColPBS1 & " ", xlSum
+        
+   sColPBS2 = Left(sCol29, 9)
+         Set PF26 = Pt2.PivotFields(sCol29)
+    Pt2.AddDataField PF26, sColPBS2 & " ", xlSum
+ 
+   sColPBS3 = Left(sCol30, 9)
+         Set PF27 = Pt2.PivotFields(sCol30)
+    Pt2.AddDataField PF27, sColPBS3 & " ", xlSum
+
+     sColPBS4 = Left(sCol25, 9)
+         Set PF28 = Pt2.PivotFields(sCol25)
+    Pt2.AddDataField PF28, sColPBS4 & " ", xlSum
+        
+   sColPBS5 = Left(sCol26, 9)
+         Set PF29 = Pt2.PivotFields(sCol26)
+    Pt2.AddDataField PF29, sColPBS5 & " ", xlSum
+ 
+   sColPBS6 = Left(sCol27, 9)
+         Set PF30 = Pt2.PivotFields(sCol27)
+    Pt2.AddDataField PF30, sColPBS6 & " ", xlSum
+    
+     sColBilled1 = Left(sCol34, 19)
+         Set PF31 = Pt2.PivotFields(sCol34)
+    Pt2.AddDataField PF31, sColBilled1 & " ", xlSum
+        
+   sColBilled2 = Left(sCol35, 19)
+         Set PF32 = Pt2.PivotFields(sCol35)
+    Pt2.AddDataField PF32, sColBilled2 & " ", xlSum
+ 
+   sColBilled3 = Left(sCol36, 19)
+         Set PF33 = Pt2.PivotFields(sCol36)
+    Pt2.AddDataField PF33, sColBilled3 & " ", xlSum
+    
+    sColBilled4 = Left(sCol31, 19)
+         Set PF34 = Pt2.PivotFields(sCol31)
+    Pt2.AddDataField PF34, sColBilled4 & " ", xlSum
+        
+   sColBilled5 = Left(sCol32, 19)
+         Set PF35 = Pt2.PivotFields(sCol32)
+    Pt2.AddDataField PF35, sColBilled5 & " ", xlSum
+ 
+   sColBilled6 = Left(sCol33, 19)
+         Set PF36 = Pt2.PivotFields(sCol33)
+    Pt2.AddDataField PF36, sColBilled6 & " ", xlSum
+   
+            With ActiveSheet.PivotTables("PivotTable2").DataPivotField
+        .Orientation = xlColumnField
+        .Position = 1
+    End With
+ With ActiveSheet.PivotTables("PivotTable2").PivotFields("ServiceLine")
+        .PivotItems("(blank)").Visible = False
+ End With
+
+    ActiveSheet.PivotTables("PivotTable2").PivotSelect "", xlDataAndLabel, True
+    With Selection.Font
+        .Name = "Arial"
+        .Size = 11
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Arial"
+        .Size = 8
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    
+    ActiveSheet.PivotTables("PivotTable2").TableStyle2 = "PivotStyleMedium2"
+    ActiveWindow.DisplayGridlines = False
+    
+     Range("P5:U7").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent3
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+     Range("D5:I7").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorAccent3
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+        
+    Sheets("BE_Data").Select
+    Range("A1").Select
+        
+    Sheets.Add
+        ActiveSheet.Name = "BERTBR"
+         
+        ActiveWorkbook.PivotCaches.Add(SourceType:=xlDatabase, SourceData:= _
+        "BE_Data!$A:$BM").CreatePivotTable _
+        TableDestination:=Sheets("BERTBR").Range("A3"), TableName:="PivotTable3", DefaultVersion _
+        :=xlPivotTableVersion10
+
+     Set Pt3 = ActiveSheet.PivotTables("PivotTable3")
+    Sheets("BERTBR").Select
+    Cells(3, 1).Select
+
+    'Sheets("BERTBR").Select
+    'Cells(3, 1).Select
+
+    With ActiveSheet.PivotTables("PivotTable3").PivotFields("ServiceLine")
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable3").PivotFields("PU")
+        .Orientation = xlRowField
+        .Position = 2
+    End With
+    With ActiveSheet.PivotTables("PivotTable3").PivotFields("Vertical")
+        .Orientation = xlRowField
+        .Position = 3
+    End With
+    
+    
+     ActiveSheet.PivotTables("PivotTable3").PivotFields("ServiceLine").Subtotals = _
+        Array(False, False, False, False, False, False, False, False, False, False, False, False)
+      ActiveSheet.PivotTables("PivotTable3").PivotSelect "ECSORC", xlDataAndLabel, _
+        True
+    ActiveSheet.PivotTables("PivotTable3").PivotFields("PU").Subtotals = Array( _
+        False, False, False, False, False, False, False, False, False, False, False, False)
+        
+        Pt3.PivotFields("ServiceLine").ShowDetail = False
+    Pt3.PivotFields("PU").ShowDetail = False
+    
+    'sCol04 = Left(sCol4, 8)
+         'Set PF1 = Pt1.PivotFields(sCol4)
+    'Pt1.AddDataField PF1, sCol04 & " ", xlSum
+    
+    sColBERTBR1 = Left(sCol4, 8)
+         Set PF43 = Pt3.PivotFields(sCol4)
+    Pt3.AddDataField PF43, sColBERTBR1 & " ", xlSum
+    
+     sColBERTBR2 = Left(sCol5, 8)
+         Set PF44 = Pt3.PivotFields(sCol5)
+    Pt3.AddDataField PF44, sColBERTBR2 & " ", xlSum
+        
+   sColBERTBR3 = Left(sCol6, 8)
+         Set PF45 = Pt3.PivotFields(sCol6)
+    Pt3.AddDataField PF45, sColBERTBR3 & " ", xlSum
+ 
+   sColBERTBR4 = Left(sCol1, 8)
+         Set PF46 = Pt3.PivotFields(sCol1)
+    Pt3.AddDataField PF46, sColBERTBR4 & " ", xlSum
+    
+    sColBERTBR5 = Left(sCol2, 8)
+         Set PF47 = Pt3.PivotFields(sCol2)
+    Pt3.AddDataField PF47, sColBERTBR5 & " ", xlSum
+        
+   sColBERTBR6 = Left(sCol3, 8)
+         Set PF48 = Pt3.PivotFields(sCol3)
+    Pt3.AddDataField PF48, sColBERTBR6 & " ", xlSum
+    
+   sColBERTBR7 = Left(sCol40, 10)
+         Set PF36 = Pt3.PivotFields(sCol40)
+    Pt3.AddDataField PF36, sColBERTBR7 & " ", xlSum
+    
+     sColBERTBR8 = Left(sCol41, 10)
+         Set PF37 = Pt3.PivotFields(sCol41)
+    Pt3.AddDataField PF37, sColBERTBR8 & " ", xlSum
+        
+   sColBERTBR9 = Left(sCol42, 10)
+         Set PF38 = Pt3.PivotFields(sCol42)
+    Pt3.AddDataField PF38, sColBERTBR9 & " ", xlSum
+ 
+   sColBERTBR10 = Left(sCol37, 10)
+         Set PF39 = Pt3.PivotFields(sCol37)
+    Pt3.AddDataField PF39, sColBERTBR10 & " ", xlSum
+    
+    sColBERTBR11 = Left(sCol38, 10)
+         Set PF40 = Pt3.PivotFields(sCol38)
+    Pt3.AddDataField PF40, sColBERTBR11 & " ", xlSum
+        
+   sColBERTBR12 = Left(sCol39, 10)
+         Set PF41 = Pt3.PivotFields(sCol39)
+    Pt3.AddDataField PF41, sColBERTBR12 & " ", xlSum
+ 
+         'With ActiveSheet.PivotTables("PivotTable3").DataPivotField
+        '.Orientation = xlColumnField
+        '.Position = 1
+    'End With
+
+    With ActiveSheet.PivotTables("PivotTable3").DataPivotField
+        .Orientation = xlColumnField
+        .Position = 1
+    End With
+    
+ With ActiveSheet.PivotTables("PivotTable3").PivotFields("ServiceLine")
+        .PivotItems("(blank)").Visible = False
+ End With
+
+    ActiveSheet.PivotTables("PivotTable3").PivotSelect "", xlDataAndLabel, True
+    With Selection.Font
+        .Name = "Arial"
+        .Size = 8
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    With Selection.Font
+        .Name = "Arial"
+        .Size = 8
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    
+    ActiveSheet.PivotTables("PivotTable3").TableStyle2 = "PivotStyleMedium2"
+    ActiveWindow.DisplayGridlines = False
+    
+    
+    
+    ActiveWindow.ScrollWorkbookTabs Sheets:=1
+        Sheets("BE_Data").Select
+        Range("A1").Select
+
+
+
+
+
+
+

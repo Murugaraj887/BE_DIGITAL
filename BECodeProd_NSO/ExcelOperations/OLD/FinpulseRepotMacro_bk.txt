@@ -1,0 +1,222 @@
+
+
+
+    Sheets.Add Before:=ActiveSheet
+    ActiveSheet.Select
+    ActiveSheet.Name = "Summary"
+
+
+
+    ActiveWorkbook.PivotCaches.Create(SourceType:=xlDatabase, SourceData:= _
+    "DATA!$A:$DB", Version:= _
+        xlPivotTableVersion15).CreatePivotTable TableDestination:="Summary!R3C1", _
+        TableName:="PivotTable1", DefaultVersion:=xlPivotTableVersion15
+        
+
+    Set Pt1 = ActiveSheet.PivotTables("PivotTable1")
+    
+    Set PF1 = Pt1.PivotFields("TotalRevenue")
+    Pt1.AddDataField PF1, "Total Revenue", xlSum
+    
+    Set PF2 = Pt1.PivotFields("TotalBilledMonths")
+    Pt1.AddDataField PF2, "Total BilledMonths", xlSum
+    
+    
+
+    
+    With ActiveSheet.PivotTables("PivotTable1").DataPivotField
+        .Orientation = xlRowField
+        .Position = 1
+    End With
+    
+    
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("YearMonth")
+        .Orientation = xlColumnField
+        .Position = 1
+    End With
+    
+    
+    ActiveSheet.PivotTables("PivotTable1").CalculatedFields.Add "PM", _
+        "=IF(TotalRevenue=0,0,(ProjectMargin/TotalRevenue))", True
+    ActiveSheet.PivotTables("PivotTable1").PivotFields("PM").Orientation = _
+        xlDataField
+        
+
+    ActiveSheet.PivotTables("PivotTable1").CalculatedFields.Add "GM", _
+        "= IF(TotalRevenue=0,0,(GrossMargin/TotalRevenue))", True
+    ActiveSheet.PivotTables("PivotTable1").PivotFields("GM").Orientation = _
+        xlDataField
+        
+        
+
+    ActiveSheet.PivotTables("PivotTable1").CalculatedFields.Add "PBT", _
+        "= IF(TotalRevenue=0,0,(PBTBeforeInvestment/TotalRevenue) )", True
+    ActiveSheet.PivotTables("PivotTable1").PivotFields("PBT").Orientation = _
+        xlDataField
+        
+        
+	With ActiveSheet.PivotTables("PivotTable1").PivotFields("YearMonth")
+        .PivotItems("(blank)").Visible = False
+        End With
+
+    With ActiveSheet.PivotTables("PivotTable1")
+        .ColumnGrand = False
+        .RowGrand = False
+    End With
+
+    Range("B7:I7").Select
+    Selection.Style = "Percent"
+    Range("B8:I9").Select
+    Selection.Style = "Percent"
+    
+    
+    ActiveSheet.PivotTables("PivotTable1").DataPivotField.PivotItems("Sum of PM"). _
+        Caption = "PM%"
+    Range("A8").Select
+    ActiveSheet.PivotTables("PivotTable1").DataPivotField.PivotItems("Sum of GM"). _
+        Caption = "GM%"
+    Range("A9").Select
+    ActiveSheet.PivotTables("PivotTable1").DataPivotField.PivotItems("Sum of PBT"). _
+        Caption = "PBT%"
+        
+
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields( _
+        "GroupMasterProjectCode")
+        .Orientation = xlPageField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("MasterProject")
+        .Orientation = xlPageField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("ProjectCode")
+        .Orientation = xlPageField
+        .Position = 1
+    End With
+    
+
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("MasterCustomerCode")
+        .Orientation = xlPageField
+        .Position = 1
+    End With
+    With ActiveSheet.PivotTables("PivotTable1").PivotFields("CustomerCode")
+        .Orientation = xlPageField
+        .Position = 1
+    End With
+    
+    Range("G21").Select
+    ActiveWindow.DisplayGridlines = False
+    Cells.Select
+    With Selection.Font
+        .Name = "Calibri"
+        .Size = 9
+        .Strikethrough = False
+        .Superscript = False
+        .Subscript = False
+        .OutlineFont = False
+        .Shadow = False
+        .Underline = xlUnderlineStyleNone
+        .ColorIndex = xlAutomatic
+        .TintAndShade = 0
+        .ThemeFont = xlThemeFontNone
+    End With
+    Range("B9:I10").Select
+    Selection.NumberFormat = "0.000"
+    Selection.NumberFormat = "0.00"
+    Selection.NumberFormat = "0.0"
+    ActiveSheet.PivotTables("PivotTable1").PivotSelect "Values[All]", xlLabelOnly _
+        + xlFirstRow, True
+    Range("A7:I13").Select
+    Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+    Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+    With Selection.Borders(xlEdgeLeft)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeTop)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeBottom)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlEdgeRight)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideVertical)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    With Selection.Borders(xlInsideHorizontal)
+        .LineStyle = xlContinuous
+        .ColorIndex = 0
+        .TintAndShade = 0
+        .Weight = xlThin
+    End With
+    
+    
+
+    Range("B8:I8").Select
+    With Selection
+        .HorizontalAlignment = xlRight
+        .VerticalAlignment = xlBottom
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    Range("B8:I13").Select
+    With Selection
+        .VerticalAlignment = xlCenter
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlCenter
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = False
+    End With
+    
+    Range("B9:I9").Select
+    With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 65535
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
+
+	 Range("B10:I10").Select
+	 With Selection.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .Color = 65535
+        .TintAndShade = 0
+        .PatternTintAndShade = 0
+    End With
